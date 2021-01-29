@@ -2,8 +2,9 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - python
+  - shell: shell
+  - shell--ocarina: ocarina
+  - python: python
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -64,6 +65,11 @@ api.kittens.get()
 
 ```shell
 curl "http://example.com/api/kittens" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```shell--ocarina
+ocarina get kitten \
   -H "Authorization: meowmeowmeow"
 ```
 
