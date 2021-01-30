@@ -291,7 +291,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;shell--ocarina&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell--ocarina&quot;,&quot;plaintext--uploader&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -301,8 +301,8 @@
     <div class="toc-wrapper">
       <img src="images/logo-1e815a84.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="shell--ocarina">ocarina</a>
+              <a href="#" data-language-name="plaintext--uploader">uploader</a>
               <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
@@ -315,6 +315,14 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#biosamples" class="toc-h1 toc-link" data-title="Biosamples">Biosamples</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-one-or-more-biosamples" class="toc-h2 toc-link" data-title="Add one or more biosamples">Add one or more biosamples</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
@@ -350,7 +358,15 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<div class="highlight"><pre class="highlight plaintext tab-plaintext--uploader"><code>
+See https://metadata.docs.cog-uk.io/
+
+## Hello
+
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
@@ -370,12 +386,212 @@ curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
+<h1 id='biosamples'>Biosamples</h1><h2 id='add-one-or-more-biosamples'>Add one or more biosamples</h2>
+<p><code>/artifact/biosample/add/</code></p>
+<h3 id='attributes'>Attributes</h3>
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put biosample <span class="se">\</span>
+    <span class="nt">--adm1</span> UK-ENG <span class="se">\</span>
+    <span class="nt">--central-sample-id</span> BIRM-12345 <span class="se">\</span>
+    <span class="nt">--collection-date</span> 2020-06-03 <span class="se">\</span>
+    <span class="nt">--is-surveillance</span> Y 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put biosample <span class="se">\</span>
+    <span class="nt">--adm1</span> UK-ENG <span class="se">\</span>
+    <span class="nt">--central-sample-id</span> BIRM-12345 <span class="se">\</span>
+    <span class="nt">--collection-date</span> 2020-06-03 <span class="se">\</span>
+    <span class="nt">--is-surveillance</span> Y <span class="se">\</span>
+    <span class="nt">--adm2</span> Birmingham <span class="se">\</span>
+    <span class="nt">--adm2-private</span> B20 <span class="se">\</span>
+    <span class="nt">--biosample-source-id</span> ABC12345 <span class="se">\</span>
+    <span class="nt">--collecting-org</span> <span class="s1">'Hypothetical University of Hooting'</span> <span class="se">\</span>
+    <span class="nt">--received-date</span> 2020-06-04 <span class="se">\</span>
+    <span class="nt">--root-sample-id</span> PHA12345 <span class="se">\</span>
+    <span class="nt">--sample-type-collected</span> swab <span class="se">\</span>
+    <span class="nt">--sample-type-received</span> primary <span class="se">\</span>
+    <span class="nt">--sender-sample-id</span> LAB12345 <span class="se">\</span>
+    <span class="nt">--source-age</span> 29 <span class="se">\</span>
+    <span class="nt">--source-sex</span> F <span class="se">\</span>
+    <span class="nt">--swab-site</span> nose-throat 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: <code style='word-break: normal'>admitted_date</code>, <code style='word-break: normal'>admitted_hospital_name</code>, <code style='word-break: normal'>admitted_hospital_trust_or_board</code>, <code style='word-break: normal'>admitted_with_covid_diagnosis</code>, <code style='word-break: normal'>anonymised_care_home_code</code>, <code style='word-break: normal'>employing_hospital_name</code>, <code style='word-break: normal'>employing_hospital_trust_or_board</code>, <code style='word-break: normal'>is_care_home_resident</code>, <code style='word-break: normal'>is_care_home_worker</code>, <code style='word-break: normal'>is_hcw</code>, <code style='word-break: normal'>is_hospital_patient</code>, <code style='word-break: normal'>is_icu_patient</code></p></blockquote>
+
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+
+<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/bulk-upload">https://metadata.docs.cog-uk.io/bulk-upload-1/bulk-upload</a></p></blockquote>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>adm1</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td>Code of UK home nation of the patient from which the sample was collected</td>
+<td><ul><li><code>UK-ENG</code></li><li><code>UK-SCT</code></li><li><code>UK-WLS</code></li><li><code>UK-NIR</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i></td>
+<td>The centrally shared ID that you will use to refer to this sample inside the consortium.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>collection_date</code></b></br>string, <i>required</i></td>
+<td>Provide where possible. When collection_date cannot be provided, you must provide received_date instead.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>is_surveillance</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td>Whether this sample was collected under the COGUK surveillance protocol.</td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >adm2</code></b></br>string</td>
+<td>The city or county that the patient lives in (avoid abbreviations or short hand)</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >adm2_private</code></b></br>string</td>
+<td>The outer postcode for the patient&#39;s home address (first half of the postcode only)</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >admitted_date</code></b></br>string</td>
+<td>If is_hospital_patient, the date (YYYY-MM-DD) that the patient was admitted to hospital</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >admitted_hospital_name</code></b></br>string</td>
+<td>If is_hospital_patient, provide the name of the hospital. If you do not know the name, use HOSPITAL</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >admitted_hospital_trust_or_board</code></b></br>string</td>
+<td>If is_hospital_patient, provide the name of the trust or board that administers the hospital the patient was admitted to.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >admitted_with_covid_diagnosis</code></b></br>string, <i>enum</i></td>
+<td>If is_hospital_patient, whether the patient was admitted with a COVID diagnosis</td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >anonymised_care_home_code</code></b></br>string</td>
+<td>A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >biosample_source_id</code></b></br>string</td>
+<td>A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.</br></br>  DO NOT USE AN NHS NUMBER HERE.</br></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >collecting_org</code></b></br>string</td>
+<td>The site (eg. hospital or surgery) that this sample was originally collected by.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >employing_hospital_name</code></b></br>string</td>
+<td>If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >employing_hospital_trust_or_board</code></b></br>string</td>
+<td>If is_hcw, provide the name of the employing trust or board.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >is_care_home_resident</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >is_care_home_worker</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >is_hcw</code></b></br>string, <i>enum</i></td>
+<td>Whether the sample was collected from a healthcare worker. This includes hospital-associated workers.</td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >is_hospital_patient</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >is_icu_patient</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >metadata</code></b></br>object</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >metrics</code></b></br>object</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >received_date</code></b></br>string</td>
+<td>Date sample was first received by any lab. This date should be as close to possible to collection_date. This date must be provided if collection_date is missing.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >root_sample_id</code></b></br>string</td>
+<td>Identifier assigned to this sample from one of the health agencies (eg. PHE samples will be prefixed with H20). This is necessary for linking samples to private patient metadata later.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >sample_type_collected</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>dry swab</code></li><li><code>swab</code></li><li><code>sputum</code></li><li><code>BAL</code></li><li><code>aspirate</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >sample_type_received</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>primary</code></li><li><code>extract</code></li><li><code>culture</code></li><li><code>lysate</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >sender_sample_id</code></b></br>string</td>
+<td>If you are permitted, provide the identifier that was sent by your laboratory to SGSS here.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >source_age</code></b></br>integer</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code >source_sex</code></b></br>string, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>F</code></li><li><code>M</code></li><li><code>Other</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code >swab_site</code></b></br>string, <i>enum</i></td>
+<td>Required if sample_type_collected is swab</td>
+<td><ul><li><code>nose</code></li><li><code>throat</code></li><li><code>nose-throat</code></li><li><code>endotracheal</code></li><li><code>rectal</code></li></ul></td>
+</tr>
+</tbody></table>
+<h3 id='metadata'>Metadata</h3><div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code><span class="nt">--metadata</span> str value x
+</code></pre></div>
+<blockquote class="lang-specific plaintext--uploader">
+<p>The uploader supports the following column name to (key, value) mapping</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext tab-plaintext--uploader"><code>...
+</code></pre></div>
+<p>Additonal metadata can be provided:
+The following keys and values are reserved:</p>
 <h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina get kitten <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre></div>
@@ -553,8 +769,8 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="shell--ocarina">ocarina</a>
+                <a href="#" data-language-name="plaintext--uploader">uploader</a>
                 <a href="#" data-language-name="python">python</a>
           </div>
       </div>
