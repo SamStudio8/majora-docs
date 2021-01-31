@@ -62,7 +62,6 @@ paths:
         x-ocarina-cmd: "put biosample"
         x-ocarina-api: null
         x-uploader-doc: "https://metadata.docs.cog-uk.io/bulk-upload-1/bulk-upload"
-        x-uploader-aside: ""
         requestBody:
           description: "Biosample to be added to Majora"
           content:
@@ -229,25 +228,28 @@ components:
       properties:
         central_sample_id:
           x-ocarina-param: "--central-sample-id"
+          x-priority: 0
           type: string
           example: "BIRM-12345"
           description: "The centrally shared ID that you will use to refer to this sample inside the consortium."
         biosample_source_id:
           x-ocarina-param: "--biosample-source-id"
+          x-ocarina-warning: "Do not provide personally identifying information here. Never use an NHS number."
+          x-priority: 100
           example: "ABC12345"
           type: string
           description: |
             A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.
-            
-              DO NOT USE AN NHS NUMBER HERE.
         root_sample_id:
           example: "PHA12345"
           x-ocarina-param: "--root-sample-id"
+          x-priority: 100
           type: string
           description: "Identifier assigned to this sample from one of the health agencies (eg. PHE samples will be prefixed with H20). This is necessary for linking samples to private patient metadata later."
         sender_sample_id:
           example: "LAB12345"
           x-ocarina-param: "--sender-sample-id"
+          x-priority: 100
           type: string
           description: "If you are permitted, provide the identifier that was sent by your laboratory to SGSS here."
     BiosampleCollection:
@@ -261,12 +263,14 @@ components:
         adm1:
           type: string
           x-ocarina-param: "--adm1"
+          x-priority: 0
           description: "Code of UK home nation of the patient from which the sample was collected"
           enum: ["UK-ENG", "UK-SCT", "UK-WLS", "UK-NIR"]
           example: "UK-ENG"
         adm2:
           type: string
           x-ocarina-param: "--adm2"
+          x-priority: 2
           example: "Birmingham"
           description: "The city or county that the patient lives in (avoid abbreviations or short hand)"
         adm2_private:
@@ -277,12 +281,14 @@ components:
         is_surveillance:
           type: string
           x-ocarina-param: "--is-surveillance"
+          x-priority: 0
           enum: ["Y", "N"]
           example: "Y"
           description: "Whether this sample was collected under the COGUK surveillance protocol."
         collection_date:
           type: string
           x-ocarina-param: "--collection-date"
+          x-priority: 0
           format: date
           example: "2020-06-03"
           nullable: true
@@ -290,42 +296,51 @@ components:
         received_date:
           type: string
           x-ocarina-param: "--received-date"
+          x-priority: 1
           format: date
           example: "2020-06-04"
           description: "Date sample was first received by any lab. This date should be as close to possible to collection_date. This date must be provided if collection_date is missing."
         collecting_org:
           type: string
           x-ocarina-param: "--collecting-org"
+          x-priority: 100
           description: "The site (eg. hospital or surgery) that this sample was originally collected by."
           example: "Hypothetical University of Hooting"
         sample_type_collected:
           x-ocarina-param: "--sample-type-collected"
+          x-priority: 100
           type: string
           example: "swab"
           enum: ["dry swab", "swab", "sputum", "BAL", "aspirate"]
         sample_type_received:
           x-ocarina-param: "--sample-type-received"
+          x-priority: 100
           type: string
           example: "primary"
           enum: ["primary", "extract", "culture", "lysate"]
         source_age:
           x-ocarina-param: "--source-age"
+          x-priority: 2
           type: integer
           example: "29"
           minimum: 0
+          description: "Ages should be whole numbers. Neonatals should be entered as 0."
         source_sex:
           x-ocarina-param: "--source-sex"
+          x-priority: 2
           example: "F"
           type: string
           enum: ["F", "M", "Other"]
         swab_site:
           x-ocarina-param: "--swab-site"
+          x-priority: 100
           type: string
           enum: ["nose","throat","nose-throat","endotracheal","rectal"]
           example: "nose-throat"
           description: "Required if sample_type_collected is swab"
         is_hcw:
           x-ocarina-param: null
+          x-priority: 100
           type: string
           nullable: true
           enum:
@@ -336,51 +351,62 @@ components:
         employing_hospital_name:
           type: string
           x-ocarina-param: null
+          x-priority: 100
           description: "If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL"
         employing_hospital_trust_or_board:
           type: string
           x-ocarina-param: null
+          x-priority: 100
           description: "If is_hcw, provide the name of the employing trust or board."
         is_hospital_patient:
           type: string
           x-ocarina-param: null
+          x-priority: 100
           nullable: true
           enum: ["Y", "N", null]
         is_icu_patient:
           type: string
           x-ocarina-param: null
+          x-priority: 100
           nullable: true
           enum: ["Y", "N", null]
         admitted_date:
           x-ocarina-param: null
+          x-priority: 100
           description: "If is_hospital_patient, the date (YYYY-MM-DD) that the patient was admitted to hospital"
           type: string
           format: date
         admitted_hospital_name:
           x-ocarina-param: null
+          x-priority: 100
           type: string
           description: "If is_hospital_patient, provide the name of the hospital. If you do not know the name, use HOSPITAL"
         admitted_hospital_trust_or_board:
           x-ocarina-param: null
+          x-priority: 100
           type: string
           description: "If is_hospital_patient, provide the name of the trust or board that administers the hospital the patient was admitted to."
         is_care_home_worker:
           x-ocarina-param: null
+          x-priority: 100
           type: string
           nullable: true
           enum: ["Y", "N", null]
         is_care_home_resident:
           x-ocarina-param: null
+          x-priority: 100
           type: string
           nullable: true
           enum: ["Y", "N", null]
         anonymised_care_home_code:
           x-ocarina-param: null
+          x-priority: 100
           description: "A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home."
           type: string
           maxLength: 10
         admitted_with_covid_diagnosis:
           x-ocarina-param: null
+          x-priority: 100
           description: "If is_hospital_patient, whether the patient was admitted with a COVID diagnosis"
           type: string
           nullable: true
@@ -594,8 +620,8 @@ components:
           properties:
             records:
               type: object
-              additionalProperties:
-                $ref: '#/components/schemas/Metric_CycleThreshold'
+              allOf:
+                - $ref: '#/components/schemas/Metric_CycleThreshold'
     Metric_CycleThreshold:
       title: 'metric_ct'
       required: 
@@ -608,9 +634,22 @@ components:
         ct_value:
           type: number
           minimum: 0.0
+          description: "Cycle threshold value. Cannot be negative. Code an inconclusive or negative test as 0."
+          x-ocarina-namespace: "ct"
+          x-uploader-column: "ct_#_ct_value"
+          x-uploader-limit: 2
+          x-ocarina-param: "ct_value"
+          x-ocarina-in-record: True
+          example: "25"
         test_kit:
           type: string
           nullable: true
+          x-ocarina-namespace: "ct"
+          x-ocarina-param: "test_kit"
+          x-uploader-column: "ct_#_test_kit"
+          x-uploader-limit: 2
+          x-ocarina-in-record: True
+          example: "INHOUSE"
           enum: [
             "ALTONA",
             "ABBOTT",
@@ -630,6 +669,12 @@ components:
         test_platform:
           type: string
           nullable: true
+          x-ocarina-namespace: "ct"
+          x-ocarina-param: "test_platform"
+          x-uploader-column: "ct_#_test_platform"
+          x-uploader-limit: 2
+          x-ocarina-in-record: True
+          example: "INHOUSE"
           enum: [
             "ALTOSTAR_AM16",
             "ABBOTT_M2000",
@@ -654,6 +699,12 @@ components:
         test_target:
           type: string
           nullable: true
+          x-ocarina-namespace: "ct"
+          x-ocarina-param: "test_target"
+          x-uploader-column: "ct_#_test_target"
+          x-uploader-limit: 2
+          x-ocarina-in-record: True
+          example: "ORF8"
           enum: [
             "E",
             "N",
@@ -682,18 +733,34 @@ components:
             required:
             - cluster
             properties:
-              cluster:
+              epi_cluster:
                 type: string
                 example: "CLUSTER8"
+                x-ocarina-namespace: "epi"
+                x-ocarina-param: "cluster"
+                description: "A local identifier for a known case cluster"
+                x-uploader-column: "epi_cluster"
           investigation:
             type: object
             properties:
               investigation_name:
                 type: string
                 example: "West Midlands HCW"
+                description: "A named investigation (eg. a surveillance or directed case group)"
+                x-ocarina-namespace: "investigation"
+                x-ocarina-param: "name"
+                x-uploader-column: "investigation_name"
               investigation_site:
                 type: string
                 example: "QEHB"
+                x-ocarina-namespace: "investigation"
+                x-ocarina-param: "site"
+                description: "An optional site name or code to differentiate between sites if the investigation covers more than one site."
+                x-uploader-column: "investigation_site"
               investigation_cluster:
                 type: string
                 example: "Ward 0"
+                description: "An optional identifier for a cluster within an investigation"
+                x-ocarina-param: "cluster"
+                x-ocarina-namespace: "investigation"
+                x-uploader-column: "investigation_cluster"
