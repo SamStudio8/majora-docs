@@ -65,8 +65,11 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 # Biosamples
 
-## Add one or more biosamples
+## Add one or more biosamples to Majora
+
 <code>/artifact/biosample/add/</code>
+
+
 ### Attributes
 <blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
 ```shell--ocarina
@@ -83,17 +86,17 @@ ocarina put biosample \
 	--central-sample-id BIRM-12345 \
 	--collection-date 2020-06-03 \
 	--is-surveillance Y \
+	--received-date 2020-06-04 \
 	--adm2 Birmingham \
+	--source-age 29 \
+	--source-sex F \
 	--adm2-private B20 \
 	--biosample-source-id ABC12345 \
 	--collecting-org 'Hypothetical University of Hooting' \
-	--received-date 2020-06-04 \
 	--root-sample-id PHA12345 \
 	--sample-type-collected swab \
 	--sample-type-received primary \
 	--sender-sample-id LAB12345 \
-	--source-age 29 \
-	--source-sex F \
 	--swab-site nose-throat 
 ```
 <blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: <code style='word-break: normal'>admitted_date</code>, <code style='word-break: normal'>admitted_hospital_name</code>, <code style='word-break: normal'>admitted_hospital_trust_or_board</code>, <code style='word-break: normal'>admitted_with_covid_diagnosis</code>, <code style='word-break: normal'>anonymised_care_home_code</code>, <code style='word-break: normal'>employing_hospital_name</code>, <code style='word-break: normal'>employing_hospital_trust_or_board</code>, <code style='word-break: normal'>is_care_home_resident</code>, <code style='word-break: normal'>is_care_home_worker</code>, <code style='word-break: normal'>is_hcw</code>, <code style='word-break: normal'>is_hospital_patient</code>, <code style='word-break: normal'>is_icu_patient</code></p></blockquote>
@@ -106,180 +109,84 @@ Name | Description | Options
 <b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i> | The centrally shared ID that you will use to refer to this sample inside the consortium. | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>collection_date</code></b></br>string, <i>required</i> | Provide where possible. When collection_date cannot be provided, you must provide received_date instead. | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>is_surveillance</code></b></br>string, <i>required</i>, <i>enum</i> | Whether this sample was collected under the COGUK surveillance protocol. | <ul><li><code>Y</code></li><li><code>N</code></li></ul>
-<b><code >adm2</code></b></br>string | The city or county that the patient lives in (avoid abbreviations or short hand) | <ul></ul>
-<b><code >adm2_private</code></b></br>string | The outer postcode for the patient's home address (first half of the postcode only) | <ul></ul>
-<b><code >admitted_date</code></b></br>string | If is_hospital_patient, the date (YYYY-MM-DD) that the patient was admitted to hospital | <ul></ul>
-<b><code >admitted_hospital_name</code></b></br>string | If is_hospital_patient, provide the name of the hospital. If you do not know the name, use HOSPITAL | <ul></ul>
-<b><code >admitted_hospital_trust_or_board</code></b></br>string | If is_hospital_patient, provide the name of the trust or board that administers the hospital the patient was admitted to. | <ul></ul>
-<b><code >admitted_with_covid_diagnosis</code></b></br>string, <i>enum</i> | If is_hospital_patient, whether the patient was admitted with a COVID diagnosis | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code >anonymised_care_home_code</code></b></br>string | A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home. | <ul></ul>
-<b><code >biosample_source_id</code></b></br>string | A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.</br></br>  DO NOT USE AN NHS NUMBER HERE.</br> | <ul></ul>
-<b><code >collecting_org</code></b></br>string | The site (eg. hospital or surgery) that this sample was originally collected by. | <ul></ul>
-<b><code >employing_hospital_name</code></b></br>string | If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL | <ul></ul>
-<b><code >employing_hospital_trust_or_board</code></b></br>string | If is_hcw, provide the name of the employing trust or board. | <ul></ul>
-<b><code >is_care_home_resident</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code >is_care_home_worker</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code >is_hcw</code></b></br>string, <i>enum</i> | Whether the sample was collected from a healthcare worker. This includes hospital-associated workers. | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code >is_hospital_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code >is_icu_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code >metadata</code></b></br>object |  | <ul></ul>
-<b><code >metrics</code></b></br>object |  | <ul></ul>
-<b><code >received_date</code></b></br>string | Date sample was first received by any lab. This date should be as close to possible to collection_date. This date must be provided if collection_date is missing. | <ul></ul>
-<b><code >root_sample_id</code></b></br>string | Identifier assigned to this sample from one of the health agencies (eg. PHE samples will be prefixed with H20). This is necessary for linking samples to private patient metadata later. | <ul></ul>
-<b><code >sample_type_collected</code></b></br>string, <i>enum</i> |  | <ul><li><code>dry swab</code></li><li><code>swab</code></li><li><code>sputum</code></li><li><code>BAL</code></li><li><code>aspirate</code></li></ul>
-<b><code >sample_type_received</code></b></br>string, <i>enum</i> |  | <ul><li><code>primary</code></li><li><code>extract</code></li><li><code>culture</code></li><li><code>lysate</code></li></ul>
-<b><code >sender_sample_id</code></b></br>string | If you are permitted, provide the identifier that was sent by your laboratory to SGSS here. | <ul></ul>
-<b><code >source_age</code></b></br>integer |  | <ul></ul>
-<b><code >source_sex</code></b></br>string, <i>enum</i> |  | <ul><li><code>F</code></li><li><code>M</code></li><li><code>Other</code></li></ul>
-<b><code >swab_site</code></b></br>string, <i>enum</i> | Required if sample_type_collected is swab | <ul><li><code>nose</code></li><li><code>throat</code></li><li><code>nose-throat</code></li><li><code>endotracheal</code></li><li><code>rectal</code></li></ul>
+<b><code style='color:#000; background-color:#ffc107'>received_date</code></b></br>string, <i>possibly required</i> | Date sample was first received by any lab. This date should be as close to possible to collection_date. This date must be provided if collection_date is missing. | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>adm2</code></b></br>string, <i>recommended</i> | The city or county that the patient lives in (avoid abbreviations or short hand) | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>source_age</code></b></br>integer, <i>recommended</i> | Ages should be whole numbers. Neonatals should be entered as 0. | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>source_sex</code></b></br>string, <i>recommended</i>, <i>enum</i> |  | <ul><li><code>F</code></li><li><code>M</code></li><li><code>Other</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>adm2_private</code></b></br>string | The outer postcode for the patient's home address (first half of the postcode only) | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>admitted_date</code></b></br>string | If is_hospital_patient, the date (YYYY-MM-DD) that the patient was admitted to hospital | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>admitted_hospital_name</code></b></br>string | If is_hospital_patient, provide the name of the hospital. If you do not know the name, use HOSPITAL | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>admitted_hospital_trust_or_board</code></b></br>string | If is_hospital_patient, provide the name of the trust or board that administers the hospital the patient was admitted to. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>admitted_with_covid_diagnosis</code></b></br>string, <i>enum</i> | If is_hospital_patient, whether the patient was admitted with a COVID diagnosis | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>anonymised_care_home_code</code></b></br>string | A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>biosample_source_id</code></b></br>string | A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.</br><aside class='warning' style='padding: 1em'>Do not provide personally identifying information here. Never use an NHS number.</aside> | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>collecting_org</code></b></br>string | The site (eg. hospital or surgery) that this sample was originally collected by. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>employing_hospital_name</code></b></br>string | If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>employing_hospital_trust_or_board</code></b></br>string | If is_hcw, provide the name of the employing trust or board. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_care_home_resident</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_care_home_worker</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_hcw</code></b></br>string, <i>enum</i> | Whether the sample was collected from a healthcare worker. This includes hospital-associated workers. | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_hospital_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_icu_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>root_sample_id</code></b></br>string | Identifier assigned to this sample from one of the health agencies (eg. PHE samples will be prefixed with H20). This is necessary for linking samples to private patient metadata later. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sample_type_collected</code></b></br>string, <i>enum</i> |  | <ul><li><code>dry swab</code></li><li><code>swab</code></li><li><code>sputum</code></li><li><code>BAL</code></li><li><code>aspirate</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sample_type_received</code></b></br>string, <i>enum</i> |  | <ul><li><code>primary</code></li><li><code>extract</code></li><li><code>culture</code></li><li><code>lysate</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sender_sample_id</code></b></br>string | If you are permitted, provide the identifier that was sent by your laboratory to SGSS here. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>swab_site</code></b></br>string, <i>enum</i> | Required if sample_type_collected is swab | <ul><li><code>nose</code></li><li><code>throat</code></li><li><code>nose-throat</code></li><li><code>endotracheal</code></li><li><code>rectal</code></li></ul>
+
+
+### Metrics
+<blockquote class="lang-specific shell--ocarina"><p>To provide metrics with Ocarina:</p></blockquote>
+```shell--ocarina
+ocarina put biosample \
+	...
+	--metric ct.# ct_value 25 \
+	--metric ct.# test_kit INHOUSE \
+	--metric ct.# test_platform INHOUSE \
+	--metric ct.# test_target ORF8 
+```
+<blockquote class="lang-specific shell--ocarina"><p>If a particular metric supports storing multiple records, you can provide them by incrementing a numerical suffix after the metric's namespace: <i>e.g.</i> <code>--metric name.1 key value</code> ... <code>--metric name.N key value.</code></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Some metrics can be provided via the uploader using these column names:</p>
+<ul><li><code>ct ct_value</code> ▶ <code>ct_#_ct_value (limit 2)</code></li>
+<li><code>ct test_kit</code> ▶ <code>ct_#_test_kit (limit 2)</code></li>
+<li><code>ct test_platform</code> ▶ <code>ct_#_test_platform (limit 2)</code></li>
+<li><code>ct test_target</code> ▶ <code>ct_#_test_target (limit 2)</code></li></ul>
+</blockquote>
+
+Namespace | Name | Description | Options
+--- | ---- | ----------- | -------
+<b><code>ct</code></b> | <b><code>ct_value</code></b> | Cycle threshold value. Cannot be negative. Code an inconclusive or negative test as 0. | <ul></ul>
+<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>(blank)</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>(blank)</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_target</code></b> |  | <ul><li><code>E</code></li><li><code>N</code></li><li><code>S</code></li><li><code>RDRP</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP+N</code></li><li><code>(blank)</code></li></ul>
+
 
 ### Metadata
 
+<blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>
 ```shell--ocarina
---metadata str value x
+ocarina put biosample \
+	...
+	-m epi cluster CLUSTER8 \
+	-m investigation cluster 'Ward 0' \
+	-m investigation site QEHB \
+	-m investigation name 'West Midlands HCW' 
 ```
-
-<blockquote class="lang-specific plaintext--uploader">
-<p>The uploader supports the following column name to (key, value) mapping</p>
+<blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
+<ul><li><code>epi cluster</code> ▶ <code>epi_cluster</code></li>
+<li><code>investigation cluster</code> ▶ <code>investigation_cluster</code></li>
+<li><code>investigation site</code> ▶ <code>investigation_site</code></li>
+<li><code>investigation name</code> ▶ <code>investigation_name</code></li></ul>
 </blockquote>
+Any artifact in Majora can be 'tagged' with arbitrary key-value metadata.
+There is no limit or validation on the keys or their values. To aid organisation, keys are grouped into namespaces.
+You should note the following keys are 'reserved' and should only be used to provide meaningful information:
 
-```plaintext--uploader
-...
-```
+Namespace | Name | Description | Options
+--- | ---- | ----------- | -------
+<b><code>epi</code></b> | <b><code>epi_cluster</code></b> | A local identifier for a known case cluster | <ul></ul>
+<b><code>investigation</code></b> | <b><code>investigation_cluster</code></b> | An optional identifier for a cluster within an investigation | <ul></ul>
+<b><code>investigation</code></b> | <b><code>investigation_site</code></b> | An optional site name or code to differentiate between sites if the investigation covers more than one site. | <ul></ul>
+<b><code>investigation</code></b> | <b><code>investitgation_name</code></b> | A named investigation (eg. a surveillance or directed case group) | <ul></ul>
 
-Additonal metadata can be provided:
-The following keys and values are reserved:
-
-
-# Kittens
-
-## Get All Kittens
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell--ocarina
-ocarina get kitten \
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
