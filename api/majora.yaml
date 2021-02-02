@@ -40,7 +40,7 @@ info:
     * If metadata is missing, send a blank field or do not submit the field at all. Do not submit 'unknown' or 'null' or any other text that attempts to explain that the field is missing.
     <hr>
 
-  version: 2.3.0
+  version: 2.5.1
 externalDocs:
   description: Majora on github
   url: 'https://github.com/SamStudio8/majora'
@@ -112,6 +112,9 @@ paths:
       summary: "Add a sequencing library to Majora"
       description: ""
       operationId: "api.artifact.library.add"
+      x-ocarina-cmd: "put library"
+      x-ocarina-api: null
+      x-uploader-doc: "https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing"
       requestBody:
         description: "Library to be added to Majora"
         content:
@@ -136,6 +139,9 @@ paths:
       summary: "Add a sequencing run to Majora"
       description: ""
       operationId: "api.process.sequencing.add"
+      x-ocarina-cmd: "put sequencing"
+      x-ocarina-api: null
+      x-uploader-doc: "https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing"
       requestBody:
         description: "Run to be added to Majora"
         content:
@@ -285,6 +291,12 @@ components:
           enum: ["Y", "N"]
           example: "Y"
           description: "Whether this sample was collected under the COGUK surveillance protocol."
+        collection_pillar:
+          type: integer
+          x-ocarina-param: "--collection-pillar"
+          x-priority: 100
+          example: "2"
+          description: "The pillar under which this sample was collected (e.g. 1, 2). This is likely 1, but leave blank if unsure."
         collection_date:
           type: string
           x-ocarina-param: "--collection-date"
@@ -438,24 +450,42 @@ components:
       - biosamples
       properties:
         library_name:
+          x-priority: 0
           type: string
-          example: "BIRM-LIBRARY-20200322"
+          example: "HOOT-LIBRARY-20200322"
           description: "A unique, somewhat memorable name for your library."
+          x-ocarina-param: "--library-name"
         library_layout_config:
           type: string
+          x-priority: 0
           enum: ["SINGLE", "PAIRED"]
+          x-ocarina-param: "--library-layout-config"
+          example: "PAIRED"
         library_seq_kit:
           type: string
-          example: "LSK109"
+          x-priority: 0
+          example: "Illumina MiSeq v3"
+          x-ocarina-param: "--library-seq-kit"
         library_seq_protocol:
           type: string
-          example: "LIGATION"
+          x-priority: 0
+          example: "MiSeq 150 Cycle"
+          x-ocarina-param: "--library-seq-protocol"
         library_layout_insert_length:
           type: integer
+          x-priority: 100
+          x-ocarina-param: "--library-layout-insert-length"
+          example: 100
         library_layout_read_length:
           type: integer
+          x-priority: 100
+          x-ocarina-param: "--library-layout-read-length"
+          example: 300
         biosamples:
           type: array
+          x-priority: 0
+          x-ocarina-param: "--biosample"
+          x-ocarina-nargs-root: "biosample"
           items:
             $ref: '#/components/schemas/LibraryBiosample'
         metadata:
@@ -516,7 +546,11 @@ components:
         central_sample_id:
           type: string
           example: "BIRM-12345"
+          x-priority: 0
+          x-ocarina-nargs-name: "biosample"
+          x-ocarina-nargs-pos: 1
         library_selection:
+          x-priority: 0
           type: string
           enum: [
             "RANDOM",
@@ -524,7 +558,11 @@ components:
             "RANDOM_PCR",
             "OTHER"
           ]
+          example: "PCR"
+          x-ocarina-nargs-name: "biosample"
+          x-ocarina-nargs-pos: 3
         library_source:
+          x-priority: 0
           type: string
           enum: [
             "GENOMIC",
@@ -534,7 +572,11 @@ components:
             "VIRAL_RNA",
             "OTHER"
           ]
+          example: "VIRAL_RNA"
+          x-ocarina-nargs-name: "biosample"
+          x-ocarina-nargs-pos: 2
         library_strategy:
+          x-priority: 0
           type: string
           enum: [
             "WGA",
@@ -543,20 +585,35 @@ components:
             "TARGETED_CAPTURE",
             "OTHER"
           ]
+          example: "AMPLICON"
+          x-ocarina-nargs-name: "biosample"
+          x-ocarina-nargs-pos: 4
         library_primers:
           type: string
-          example: "3"
+          example: "ARTIC v3"
+          x-priority: 2
+          x-uploader-column: "artic_primers"
+          x-ocarina-nargs-name: "biosample"
+          x-ocarina-nargs-pos: 6
         library_protocol:
           type: string
-          example: "ARTIC-v2"
+          x-priority: 2
+          example: "ARTIC v3 (LoCost)"
+          x-uploader-column: "artic_protocol"
+          x-ocarina-nargs-name: "biosample"
+          x-ocarina-nargs-pos: 5
         barcode:
           type: string
           example: "02"
+          x-ocarina-param: null
         sequencing_org_received_date:
           type: string
           format: date
           example: "2021-01-14"
           description: "Date sample was received by the organisation which sequenced it. This date is used for tracking sample turnaround time."
+          x-ocarina-param: "--sequencing-org-received-date"
+        metadata:
+          $ref: '#/components/schemas/BiosamplePoolingMetadata'
     Sequencing:
       title: 'sequencing_process'
       type: object
@@ -566,8 +623,10 @@ components:
       properties:
         library_name:
           type: string
-          example: "BIRM-LIBRARY-20200322"
+          example: "HOOT-LIBRARY-20200322"
           description: "The name of the library as submitted to add_library"
+          x-priority: 0
+          x-ocarina-param: "--library-name"
         runs:
           type: array
           items:
@@ -583,34 +642,49 @@ components:
         run_name:
           type: string
           description: "A unique name that corresponds to your run. Ideally, use the name generated by your sequencing instrument."
-          example: "20200604_1730_X1_FAN12345_abcdef00"
+          example: "YYMMDD_AB000000_1234_ABCDEFGHI0"
+          x-priority: 0
+          x-ocarina-param: "--run-name"
         instrument_make:
           type: string
           enum: ["ILLUMINA", "OXFORD_NANOPORE", "PACIFIC_BIOSCIENCES"]
-          example: "OXFORD_NANOPORE"
+          example: "ILLUMINA"
+          x-priority: 0
+          x-ocarina-param: "--instrument-make"
         instrument_model:
           type: string
-          example: "GridION"
+          example: "MiSeq"
+          x-priority: 0
+          x-ocarina-param: "--instrument-model"
         flowcell_id:
           type: string
-          example: "FAN12345"
+          example: "ABCDEF"
+          x-ocarina-param: "--flowcell-id"
         flowcell_type:
-          example: "R10.3"
+          example: "v3"
+          x-ocarina-param: "--flowcell-type"
         start_time:
           type: string
           format: date-time
           example: "YYYY-MM-DD HH:MM"
+          x-ocarina-param: "--start-time"
         end_time:
           type: string
           format: date-time
           example: "YYYY-MM-DD HH:MM"
+          x-ocarina-param: "--end-time"
         bioinfo_pipe_name:
           type: string
           description: "The name of the bioinformatics pipeline used for downstream analysis of this run"
-          example: "ARTIC Pipeline (Nanopolish)"
+          example: "ARTIC Pipeline (iVar)"
+          x-priority: 2
+          x-ocarina-param: "--bioinfo-pipe-name"
         bioinfo_pipe_version:
           type: string
           description: "The version number of the bioinformatics pipeline used for downstream analysis of this run"
+          example: "1.3.0"
+          x-priority: 2
+          x-ocarina-param: "--bioinfo-pipe-version"
     Metric:
       title: 'metric_base'
       type: object
@@ -721,6 +795,33 @@ components:
       additionalProperties:
         type: object
         additionalProperties: true
+    BiosamplePoolingMetadata:
+      title: 'metadata_biosample'
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Metadata'
+      - type: object
+        properties:
+          artic:
+            type: object
+            required:
+            - artic_primers
+            - artic_protocol
+            properties:
+              artic_primers:
+                type: string
+                example: "3"
+                x-ocarina-namespace: "artic"
+                x-ocarina-param: "primers"
+                description: "The version number of the ARTIC primer set (if used) to prepare this library"
+                x-uploader-column: "artic_primers"
+              artic_protocol:
+                type: string
+                example: "v3 (LoCost)"
+                x-ocarina-namespace: "artic"
+                x-ocarina-param: "protocol"
+                description: "The version number of the ARTIC protocol (if used) to prepare this library"
+                x-uploader-column: "artic_protocol"
     BiosampleMetadata:
       title: 'metadata_biosample'
       type: object
