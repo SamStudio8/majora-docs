@@ -74,8 +74,9 @@ html, body {
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    max-width: 100%;
+    max-width: -webkit-fill-available;
     margin-bottom: $logo-margin;
+    padding: 1em;
   }
 
   &>.search {
@@ -472,6 +473,8 @@ html, body {
 
     &.warning {
       background-color: $aside-warning-bg;
+      font-weight: bold;
+      color: white;
     }
 
     &.success {

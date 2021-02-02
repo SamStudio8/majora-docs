@@ -18,50 +18,37 @@ search: true
 code_clipboard: true
 ---
 
+
 # Introduction
 
-Hello, Majora!
+## Malleable All-seeing Journal Of Research Artifacts
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Majora is a Django-based wet-and-dry information management system. Majora is being rapidly developed as part of the COVID-19 Genomics UK Consortium (COG-UK) response to the outbreak of SARS-CoV-2.
+
+Majora is a system that stores metadata on biological samples, sequencing runs, bioinformatics pipelines and files. These different items are referred to generally, as "artifacts". Majora is composed of three main parts:
+
+* a database that defines "models" that represent artifacts such as samples and files,
+* a web interface that allows access to basic metadata shared about artifacts,
+* an "API" that provides an interface for other tools and programs to view and edit information about artifacts
+
+This documentation attempts to cover all bases by showing all the fields for each of the artifacts and processes that can be added, updated and retrieved from Majora.
+Although intended primarily for users who wish to write a computer program to use the API or users of the [Ocarina command line tool](https://github.com/SamStudio8/ocarina/), it should be useful for users of the CGPS metadata uploader.
+Users of the uploader will likely also want to refer to the documentation for the [metadata uploader](https://metadata.docs.cog-uk.io/).
+
+You may be interested to know that this API documentation page was created with [Slate](https://github.com/slatedocs/slate).
+
+## Important notes
+
+* Submitting a request for an artifact that already exists will allow you to change some properties of that object. The messages response will let you know if this is not the case.
+* Sending a request to update an artifact that already exists is an overwriting operation. If you submit blank fields, those fields will be irreversibly deleted from the model.
+* If metadata is missing, send a blank field or do not submit the field at all. Do not submit 'unknown' or 'null' or any other text that attempts to explain that the field is missing.
+
 
 # Authentication
 
-> To authorize, use this code:
-
-```plaintext--uploader
-
-See https://metadata.docs.cog-uk.io/
-
-## Hello
-
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+* [Authentication with the CGPS Uploader](https://metadata.docs.cog-uk.io/bulk-upload-1)
+* [Authentication with Ocarina (API key)](https://github.com/SamStudio8/ocarina#configuration)
+* [Authentication with Ocarina (OAuth)](https://docs.covid19.climb.ac.uk/oauth-app)
 
 # Biosamples
 
@@ -93,6 +80,7 @@ ocarina put biosample \
 	--adm2-private B20 \
 	--biosample-source-id ABC12345 \
 	--collecting-org 'Hypothetical University of Hooting' \
+	--collection-pillar 2 \
 	--root-sample-id PHA12345 \
 	--sample-type-collected swab \
 	--sample-type-received primary \
@@ -102,6 +90,7 @@ ocarina put biosample \
 <blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: <code style='word-break: normal'>admitted_date</code>, <code style='word-break: normal'>admitted_hospital_name</code>, <code style='word-break: normal'>admitted_hospital_trust_or_board</code>, <code style='word-break: normal'>admitted_with_covid_diagnosis</code>, <code style='word-break: normal'>anonymised_care_home_code</code>, <code style='word-break: normal'>employing_hospital_name</code>, <code style='word-break: normal'>employing_hospital_trust_or_board</code>, <code style='word-break: normal'>is_care_home_resident</code>, <code style='word-break: normal'>is_care_home_worker</code>, <code style='word-break: normal'>is_hcw</code>, <code style='word-break: normal'>is_hospital_patient</code>, <code style='word-break: normal'>is_icu_patient</code></p></blockquote>
 <blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
 <blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/bulk-upload">https://metadata.docs.cog-uk.io/bulk-upload-1/bulk-upload</a></p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>
 
 Name | Description | Options
 ---- | ----------- | -------
@@ -121,6 +110,7 @@ Name | Description | Options
 <b><code style='color:#fff; background-color:#6c757d'>anonymised_care_home_code</code></b></br>string | A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>biosample_source_id</code></b></br>string | A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.</br><aside class='warning' style='padding: 1em'>Do not provide personally identifying information here. Never use an NHS number.</aside> | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>collecting_org</code></b></br>string | The site (eg. hospital or surgery) that this sample was originally collected by. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>collection_pillar</code></b></br>integer | The pillar under which this sample was collected (e.g. 1, 2). This is likely 1, but leave blank if unsure. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>employing_hospital_name</code></b></br>string | If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>employing_hospital_trust_or_board</code></b></br>string | If is_hcw, provide the name of the employing trust or board. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>is_care_home_resident</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
@@ -152,6 +142,10 @@ ocarina put biosample \
 <li><code>ct test_platform</code> ▶ <code>ct_#_test_platform (limit 2)</code></li>
 <li><code>ct test_target</code> ▶ <code>ct_#_test_target (limit 2)</code></li></ul>
 </blockquote>
+Some artifacts in Majora can be annotated with additional Metric objects.
+Metric objects group together specific information that allows for additional description of an artifact, but does not belong in the artifact itself.
+Each metric has its own namespace, containing a fixed set of keys. Some or all of the keys may need a value to validate the Metric.
+This endpoint allows you to submit the following Metrics:
 
 Namespace | Name | Description | Options
 --- | ---- | ----------- | -------
@@ -169,24 +163,150 @@ ocarina put biosample \
 	...
 	-m epi cluster CLUSTER8 \
 	-m investigation cluster 'Ward 0' \
-	-m investigation site QEHB \
-	-m investigation name 'West Midlands HCW' 
+	-m investigation name 'West Midlands HCW' \
+	-m investigation site QEHB 
 ```
 <blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
 <ul><li><code>epi cluster</code> ▶ <code>epi_cluster</code></li>
 <li><code>investigation cluster</code> ▶ <code>investigation_cluster</code></li>
-<li><code>investigation site</code> ▶ <code>investigation_site</code></li>
-<li><code>investigation name</code> ▶ <code>investigation_name</code></li></ul>
+<li><code>investigation name</code> ▶ <code>investigation_name</code></li>
+<li><code>investigation site</code> ▶ <code>investigation_site</code></li></ul>
 </blockquote>
 Any artifact in Majora can be 'tagged' with arbitrary key-value metadata.
-There is no limit or validation on the keys or their values. To aid organisation, keys are grouped into namespaces.
-You should note the following keys are 'reserved' and should only be used to provide meaningful information:
+Unlike Metrics, there is no fixed terminology or validation on the keys or their values. Like Metrics, to aid organisation, metadata keys are grouped into namespaces.
+This endpoint has 'reserved' metadata keys that should only be used to provide meaningful information:
 
 Namespace | Name | Description | Options
 --- | ---- | ----------- | -------
 <b><code>epi</code></b> | <b><code>epi_cluster</code></b> | A local identifier for a known case cluster | <ul></ul>
 <b><code>investigation</code></b> | <b><code>investigation_cluster</code></b> | An optional identifier for a cluster within an investigation | <ul></ul>
+<b><code>investigation</code></b> | <b><code>investigation_name</code></b> | A named investigation (eg. a surveillance or directed case group) | <ul></ul>
 <b><code>investigation</code></b> | <b><code>investigation_site</code></b> | An optional site name or code to differentiate between sites if the investigation covers more than one site. | <ul></ul>
-<b><code>investigation</code></b> | <b><code>investitgation_name</code></b> | A named investigation (eg. a surveillance or directed case group) | <ul></ul>
 
+# Library
+## Add a sequencing library to Majora
+
+<code>/artifact/library/add/</code>
+
+
+### Attributes
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+```shell--ocarina
+ocarina put library \
+	--biosample BIRM-12345 VIRAL_RNA PCR AMPLICON 'ARTIC v3 (LoCost)' 'ARTIC v3' \
+	--library-layout-config PAIRED \
+	--library-name HOOT-LIBRARY-20200322 \
+	--library-seq-kit 'Illumina MiSeq v3' \
+	--library-seq-protocol 'MiSeq 150 Cycle' 
+```
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+```shell--ocarina
+ocarina put library \
+	--biosample BIRM-12345 VIRAL_RNA PCR AMPLICON 'ARTIC v3 (LoCost)' 'ARTIC v3' \
+	--library-layout-config PAIRED \
+	--library-name HOOT-LIBRARY-20200322 \
+	--library-seq-kit 'Illumina MiSeq v3' \
+	--library-seq-protocol 'MiSeq 150 Cycle' \
+	--library-layout-insert-length 100 \
+	--library-layout-read-length 300 \
+	--sequencing-org-received-date 2021-01-14 
+```
+<blockquote class="lang-specific shell--ocarina"><p>Attributes merged into positional arguments by Ocarina:<ul>
+<li><code>biosample</code> ▶ <code>central_sample_id</code> <code>library_source</code> <code>library_selection</code> <code>library_strategy</code> <code>library_protocol</code> <code>library_primers</code></li>
+</ul></blockquote>
+<blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: <code style='word-break: normal'>barcode</code></p></blockquote>
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing">https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing</a></p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Some attributes are named differently on the CGPS uploader:</p>
+<ul><li><code>library_primers</code> ▶ <code>artic_primers</code></li>
+<li><code>library_protocol</code> ▶ <code>artic_protocol</code></li></ul>
+</blockquote>
+
+Name | Description | Options
+---- | ----------- | -------
+<b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_layout_config</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>SINGLE</code></li><li><code>PAIRED</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i> | A unique, somewhat memorable name for your library. | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_selection</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>RANDOM</code></li><li><code>PCR</code></li><li><code>RANDOM_PCR</code></li><li><code>OTHER</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_seq_kit</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_seq_protocol</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_source</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>GENOMIC</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li><li><code>OTHER</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_strategy</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>WGA</code></li><li><code>WGS</code></li><li><code>AMPLICON</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>OTHER</code></li></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>library_primers</code></b></br>string, <i>recommended</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>library_protocol</code></b></br>string, <i>recommended</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>barcode</code></b></br>string |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>library_layout_insert_length</code></b></br>integer |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>library_layout_read_length</code></b></br>integer |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sequencing_org_received_date</code></b></br>string | Date sample was received by the organisation which sequenced it. This date is used for tracking sample turnaround time. | <ul></ul>
+
+
+### Metadata
+
+<blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>
+```shell--ocarina
+ocarina put library \
+	...
+	-m artic primers 3 \
+	-m artic protocol 'v3 (LoCost)' 
+```
+<blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
+<ul><li><code>artic primers</code> ▶ <code>artic_primers</code></li>
+<li><code>artic protocol</code> ▶ <code>artic_protocol</code></li></ul>
+</blockquote>
+Any artifact in Majora can be 'tagged' with arbitrary key-value metadata.
+Unlike Metrics, there is no fixed terminology or validation on the keys or their values. Like Metrics, to aid organisation, metadata keys are grouped into namespaces.
+This endpoint has 'reserved' metadata keys that should only be used to provide meaningful information:
+
+Namespace | Name | Description | Options
+--- | ---- | ----------- | -------
+<b><code>artic</code></b> | <b><code>artic_primers</code></b> | The version number of the ARTIC primer set (if used) to prepare this library | <ul></ul>
+<b><code>artic</code></b> | <b><code>artic_protocol</code></b> | The version number of the ARTIC protocol (if used) to prepare this library | <ul></ul>
+
+
+# Sequencing
+## Add a sequencing run to Majora
+
+<code>/process/sequencing/add/</code>
+
+
+### Attributes
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+```shell--ocarina
+ocarina put sequencing \
+	--instrument-make ILLUMINA \
+	--instrument-model MiSeq \
+	--library-name HOOT-LIBRARY-20200322 \
+	--run-name YYMMDD_AB000000_1234_ABCDEFGHI0 
+```
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+```shell--ocarina
+ocarina put sequencing \
+	--instrument-make ILLUMINA \
+	--instrument-model MiSeq \
+	--library-name HOOT-LIBRARY-20200322 \
+	--run-name YYMMDD_AB000000_1234_ABCDEFGHI0 \
+	--bioinfo-pipe-name 'ARTIC Pipeline (iVar)' \
+	--bioinfo-pipe-version 1.3.0 \
+	--end-time 'YYYY-MM-DD HH:MM' \
+	--flowcell-id ABCDEF \
+	--flowcell-type v3 \
+	--start-time 'YYYY-MM-DD HH:MM' 
+```
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing">https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing</a></p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>
+
+Name | Description | Options
+---- | ----------- | -------
+<b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>ILLUMINA</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>instrument_model</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i> | The name of the library as submitted to add_library | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>run_name</code></b></br>string, <i>required</i> | A unique name that corresponds to your run. Ideally, use the name generated by your sequencing instrument. | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>bioinfo_pipe_name</code></b></br>string, <i>recommended</i> | The name of the bioinformatics pipeline used for downstream analysis of this run | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>bioinfo_pipe_version</code></b></br>string, <i>recommended</i> | The version number of the bioinformatics pipeline used for downstream analysis of this run | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>end_time</code></b></br>string |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>flowcell_id</code></b></br>string |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>flowcell_type</code></b></br>None |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>start_time</code></b></br>string |  | <ul></ul>
 
