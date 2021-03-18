@@ -4,6 +4,7 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell--ocarina: ocarina
   - plaintext--uploader: uploader
+  - json--raw: json
   - python: python
 
 toc_footers:
@@ -150,8 +151,8 @@ This endpoint allows you to submit the following Metrics:
 Namespace | Name | Description | Options
 --- | ---- | ----------- | -------
 <b><code>ct</code></b> | <b><code>ct_value</code></b> | Cycle threshold value. Cannot be negative. Code an inconclusive or negative test as 0. | <ul></ul>
-<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>(blank)</code></li></ul>
-<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>(blank)</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>(blank)</code></li><li><code>TAQPATH_HT</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>(blank)</code></li><li><code>THERMO_AMPLITUDE</code></li></ul>
 <b><code>ct</code></b> | <b><code>test_target</code></b> |  | <ul><li><code>E</code></li><li><code>N</code></li><li><code>S</code></li><li><code>RDRP</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP+N</code></li><li><code>(blank)</code></li></ul>
 
 
