@@ -138,7 +138,7 @@ def insert_path(node, path, type, v):
     if len(path) == 0:
         return
 
-    print('*', node, path)
+    #print('*', node, path)
     if path[0] not in node:
         if type == "array":
             node[ path[0] ] = []
