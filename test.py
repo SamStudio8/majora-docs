@@ -36,6 +36,7 @@ def flatten_object(spec, prefix=""):
                 if field_spec.get("x-ocarina-nargs-root"):
                     flat_spec.update({field: {
                         "name": field,
+                        "type": field_spec.get("type"),
                         "path": prefix+field,
                         "required": field in sspec.get("required", []),
                         "x-priority": field_spec.get("x-priority", 100),
@@ -55,6 +56,7 @@ def flatten_object(spec, prefix=""):
                     "description": field_spec.get("description", ""),
                     "enum": [x if x else "(blank)" for x in field_spec.get("enum", [])],
                     "example": str(field_spec.get("example", "unknown")),
+                    "json_example": field_spec.get("example"),
                     "x-ocarina-param": field_spec.get("x-ocarina-param", "NA"),
                     "x-ocarina-warning": field_spec.get("x-ocarina-warning", ""),
                     "x-ocarina-namespace": field_spec.get("x-ocarina-namespace", ""),
@@ -65,6 +67,103 @@ def flatten_object(spec, prefix=""):
                     "x-ocarina-nargs-pos": field_spec.get("x-ocarina-nargs-pos"),
                 }
     return flat_spec
+
+
+
+
+def flatten_object2(spec, prefix=""):
+    flat_spec = {}
+
+    all_of = True
+    if "allOf" in spec:
+        spec = spec["allOf"]
+    else:
+        spec = [spec]
+
+    for sspec in spec:
+        for field, field_spec in sspec.get("properties", {}).items():
+            if field_spec.get("type") == "array":
+                subspec = flatten_object(field_spec.get("items", {}), prefix+field+'.')
+                flat_spec.update(subspec)
+
+                flat_spec.update({field: {
+                    "name": field,
+                    "type": field_spec.get("type"),
+                    "path": prefix+field,
+                    "required": field in sspec.get("required", []),
+                    "x-priority": field_spec.get("x-priority", 100),
+                    "x-ocarina-param": field_spec.get("x-ocarina-param", "NA"),
+                    "x-ocarina-nargs-root": field_spec.get("x-ocarina-nargs-root"),
+                }})
+            elif field_spec.get("type") == "object":
+                subspec = flatten_object(field_spec, prefix+field+'.')
+                flat_spec.update(subspec)
+                flat_spec.update({field: {
+                    "name": field,
+                    "type": field_spec.get("type"),
+                    "path": prefix+field,
+                    "required": field in sspec.get("required", []),
+                    "x-priority": field_spec.get("x-priority", 100),
+                    "x-ocarina-param": field_spec.get("x-ocarina-param", "NA"),
+                    "x-ocarina-nargs-root": field_spec.get("x-ocarina-nargs-root"),
+                }})
+            else:
+                flat_spec[field] = {
+                    "path": prefix+field,
+                    "name": field,
+                    "type": field_spec.get("type"),
+                    "required": field in sspec.get("required", []),
+                    "x-priority": field_spec.get("x-priority", 100),
+                    "description": field_spec.get("description", ""),
+                    "enum": [x if x else "(blank)" for x in field_spec.get("enum", [])],
+                    "example": str(field_spec.get("example", "unknown")),
+                    "json_example": field_spec.get("example"),
+                    "x-ocarina-param": field_spec.get("x-ocarina-param", "NA"),
+                    "x-ocarina-warning": field_spec.get("x-ocarina-warning", ""),
+                    "x-ocarina-namespace": field_spec.get("x-ocarina-namespace", ""),
+                    "x-ocarina-in-record": field_spec.get("x-ocarina-in-record", False),
+                    "x-uploader-column": field_spec.get("x-uploader-column"),
+                    "x-uploader-limit": field_spec.get("x-uploader-limit"),
+                    "x-ocarina-nargs-name": field_spec.get("x-ocarina-nargs-name"),
+                    "x-ocarina-nargs-pos": field_spec.get("x-ocarina-nargs-pos"),
+                }
+    return flat_spec
+
+
+
+
+
+def insert_path(node, path, type, v):
+
+    if len(path) == 0:
+        return
+
+    print('*', node, path)
+    if path[0] not in node:
+        if type == "array":
+            node[ path[0] ] = []
+        elif type == "object":
+            node[ path[0] ] = {}
+        else:
+            node[ path[0] ] = v
+        insert_path(node[ path[0] ], path[1:], type, v)
+    else:
+        insert_path(node, path[1:], type, v)
+
+
+
+
+
+    #print(d, parts, type, v)
+    #if not v:
+    #    if type == "array":
+    #        node[parts[-1]] = [{}]
+    #    elif type == "object":
+    #        node[parts[-1]] = {}
+    #else:
+    #    if type(node[parts[-1]]) is list:
+    #        node[parts[-2]][0][parts
+    #    node[parts[-1]] = v
 
 for path, spec in spec["paths"].items():
     #print(spec['post'].keys())
@@ -82,6 +181,17 @@ for path, spec in spec["paths"].items():
     cmd_req = []
     cmd_no = []
     uploader_map = {}
+
+    json_example = {}
+    for k, v in spec['post']['requestBody']['content']['application/json']['schema'].items():
+        for item in v:
+            flat = flatten_object2(item)
+            sort_flat = sorted(flat.items(), key=lambda x: (x[1].get("x-priority", 100), x[1].get("name")))
+            for kp, vp in sort_flat:
+                insert_path(json_example, vp["path"].split('.'), vp.get("type", "str"), vp.get("json_example"))
+    print(json_example)
+
+
     for k, v in spec['post']['requestBody']['content']['application/json']['schema'].items():
         for item in v:
             flat = flatten_object(item)
@@ -90,6 +200,8 @@ for path, spec in spec["paths"].items():
             nargs = {}
             narg_notes = []
             for kp, vp in sort_flat:
+
+
                 if "metric" in vp["path"]:
                     metrics += 1
                     continue
@@ -101,6 +213,7 @@ for path, spec in spec["paths"].items():
                     if narg_name not in nargs:
                         nargs[narg_name] = {}
                     nargs[narg_name][vp.get("x-ocarina-nargs-pos")] = {"name": vp.get("name"), "example": vp.get("example")}
+            sys.stderr.write(str(json_example) + '\n\n')
 
             for kp, vp in sort_flat:
                 if "metric" in vp["path"]:

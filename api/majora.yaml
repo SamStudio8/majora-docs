@@ -738,6 +738,7 @@ components:
             "QIASTAT",
             "ALINITY",
             "AMPLIDIAG",
+            "TAQPATH_HT",
             null
           ]
         test_platform:
@@ -768,6 +769,7 @@ components:
             "QIAGEN_ROTORGENE",
             "BD_MAX",
             "AMPLIDIAG_EASY",
+            "THERMO_AMPLITUDE",
             null
           ]
         test_target:
