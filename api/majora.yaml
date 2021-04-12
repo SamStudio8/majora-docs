@@ -293,6 +293,7 @@ components:
           description: "Whether this sample was collected under the COGUK surveillance protocol."
         collection_pillar:
           type: integer
+          enum: [1, 2, 103, 34613]
           x-ocarina-param: "--collection-pillar"
           x-priority: 100
           example: "2"
@@ -647,7 +648,7 @@ components:
           x-ocarina-param: "--run-name"
         instrument_make:
           type: string
-          enum: ["ILLUMINA", "OXFORD_NANOPORE", "PACIFIC_BIOSCIENCES"]
+          enum: ["ILLUMINA", "OXFORD_NANOPORE", "PACIFIC_BIOSCIENCES", "ION_TORRENT"]
           example: "ILLUMINA"
           x-priority: 0
           x-ocarina-param: "--instrument-make"

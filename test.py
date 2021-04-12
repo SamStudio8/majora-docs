@@ -1,4 +1,5 @@
 import sys
+import json
 
 from prance import ResolvingParser, BaseParser
 parser = ResolvingParser('api/majora.yaml')
@@ -133,37 +134,41 @@ def flatten_object2(spec, prefix=""):
 
 
 
-def insert_path(node, path, type, v):
-
+def insert_path(node, path, v_type, v):
     if len(path) == 0:
         return
 
-    #print('*', node, path)
-    if path[0] not in node:
-        if type == "array":
-            node[ path[0] ] = []
-        elif type == "object":
-            node[ path[0] ] = {}
-        else:
-            node[ path[0] ] = v
-        insert_path(node[ path[0] ], path[1:], type, v)
+    if len(path) == 1:
+        prefix = []
     else:
-        insert_path(node, path[1:], type, v)
+        prefix = path[:-1]
+    field = path[-1]
 
+    if len(prefix) > 0:
+        if prefix[0] not in node:
+            node[ prefix[0] ] = {}
+        insert_path(node[prefix[0]], path[1:], v_type, v)
+    else:
+        if path[0] not in node:
+            if v_type == "array":
+                d = {}
+                node[ path[0] ] = [d]
+                insert_path(d, path[1:], v_type, v)
+            elif v_type == "object":
+                node[ path[0] ] = {}
+                insert_path(node[ path[0] ], path[1:], v_type, v)
+            else:
+                node[path[0]] = v
+                insert_path(node, path[1:], type, v)
+        else:
+            if type(node) is list:
+                if len(node) == 0:
+                    node.append({})
+                node = node[0]
 
+            if field not in node:
+                node[ path[0] ] = v
 
-
-
-    #print(d, parts, type, v)
-    #if not v:
-    #    if type == "array":
-    #        node[parts[-1]] = [{}]
-    #    elif type == "object":
-    #        node[parts[-1]] = {}
-    #else:
-    #    if type(node[parts[-1]]) is list:
-    #        node[parts[-2]][0][parts
-    #    node[parts[-1]] = v
 
 for path, spec in spec["paths"].items():
     #print(spec['post'].keys())
@@ -187,9 +192,9 @@ for path, spec in spec["paths"].items():
         for item in v:
             flat = flatten_object2(item)
             sort_flat = sorted(flat.items(), key=lambda x: (x[1].get("x-priority", 100), x[1].get("name")))
-            for kp, vp in sort_flat:
+            for kp, vp in flat.items():
                 insert_path(json_example, vp["path"].split('.'), vp.get("type", "str"), vp.get("json_example"))
-    print(json_example)
+    #print(json_example)
 
 
     for k, v in spec['post']['requestBody']['content']['application/json']['schema'].items():
@@ -213,7 +218,7 @@ for path, spec in spec["paths"].items():
                     if narg_name not in nargs:
                         nargs[narg_name] = {}
                     nargs[narg_name][vp.get("x-ocarina-nargs-pos")] = {"name": vp.get("name"), "example": vp.get("example")}
-            sys.stderr.write(str(json_example) + '\n\n')
+            #sys.stderr.write(str(json_example) + '\n\n')
 
             for kp, vp in sort_flat:
                 if "metric" in vp["path"]:
@@ -258,6 +263,13 @@ for path, spec in spec["paths"].items():
 
                 if vp.get("x-uploader-column"):
                     uploader_map[vp.get("name")] = "%s%s" % (vp.get("x-uploader-column"), " (limit %d)" % vp.get("x-uploader-limit") if vp.get("x-uploader-limit") else "")
+
+
+        if json_example:
+            print("""<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>""")
+            print("```json--raw")
+            print(json.dumps(json_example, indent=4, sort_keys=True))
+            print("```")
 
 
         if spec["post"].get("x-ocarina-cmd", ""):
