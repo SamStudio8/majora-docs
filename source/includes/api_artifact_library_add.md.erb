@@ -1,0 +1,109 @@
+## Add a sequencing library to Majora
+
+<code>/artifact/library/add/</code>
+
+
+### Attributes
+```json--raw
+{
+    "biosamples": {
+        "barcode": "02",
+        "central_sample_id": "BIRM-12345",
+        "library_primers": "ARTIC v3",
+        "library_protocol": "ARTIC v3 (LoCost)",
+        "library_selection": "PCR",
+        "library_source": "VIRAL_RNA",
+        "library_strategy": "AMPLICON",
+        "metadata": {
+            "artic": {
+                "artic_primers": "3",
+                "artic_protocol": "v3 (LoCost)"
+            }
+        },
+        "sequencing_org_received_date": "2021-01-14"
+    },
+    "library_layout_config": "PAIRED",
+    "library_layout_insert_length": 100,
+    "library_layout_read_length": 300,
+    "library_name": "HOOT-LIBRARY-20200322",
+    "library_seq_kit": "Illumina MiSeq v3",
+    "library_seq_protocol": "MiSeq 150 Cycle",
+    "metadata": {},
+    "token": "6e06392f-e030-4cf9-911a-8dc9f2d4e714",
+    "username": "majora-sam"
+}
+```
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+```shell--ocarina
+ocarina put library \
+	--biosample BIRM-12345 VIRAL_RNA PCR AMPLICON 'ARTIC v3 (LoCost)' 'ARTIC v3' \
+	--library-layout-config PAIRED \
+	--library-name HOOT-LIBRARY-20200322 \
+	--library-seq-kit 'Illumina MiSeq v3' \
+	--library-seq-protocol 'MiSeq 150 Cycle' 
+```
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+```shell--ocarina
+ocarina put library \
+	--biosample BIRM-12345 VIRAL_RNA PCR AMPLICON 'ARTIC v3 (LoCost)' 'ARTIC v3' \
+	--library-layout-config PAIRED \
+	--library-name HOOT-LIBRARY-20200322 \
+	--library-seq-kit 'Illumina MiSeq v3' \
+	--library-seq-protocol 'MiSeq 150 Cycle' \
+	--library-layout-insert-length 100 \
+	--library-layout-read-length 300 \
+	--sequencing-org-received-date 2021-01-14 
+```
+<blockquote class="lang-specific shell--ocarina"><p>Attributes merged into positional arguments by Ocarina:<ul>
+<li><code>biosample</code> ▶ <code>central_sample_id</code> <code>library_source</code> <code>library_selection</code> <code>library_strategy</code> <code>library_protocol</code> <code>library_primers</code></li>
+</ul></blockquote>
+<blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: <code style='word-break: normal'>barcode</code></p></blockquote>
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing">https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing</a></p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Some attributes are named differently on the CGPS uploader:</p>
+<ul><li><code>library_primers</code> ▶ <code>artic_primers</code></li>
+<li><code>library_protocol</code> ▶ <code>artic_protocol</code></li></ul>
+</blockquote>
+
+Name | Description | Options
+---- | ----------- | -------
+<b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_layout_config</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>PAIRED</code></li><li><code>SINGLE</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i> | A unique, somewhat memorable name for your library. | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_selection</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>OTHER</code></li><li><code>PCR</code></li><li><code>RANDOM</code></li><li><code>RANDOM_PCR</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_seq_kit</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_seq_protocol</code></b></br>string, <i>required</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_source</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>GENOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>OTHER</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_strategy</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>AMPLICON</code></li><li><code>OTHER</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>WGA</code></li><li><code>WGS</code></li></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>library_primers</code></b></br>string, <i>recommended</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#17a2b8'>library_protocol</code></b></br>string, <i>recommended</i> |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>barcode</code></b></br>string |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>library_layout_insert_length</code></b></br>integer |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>library_layout_read_length</code></b></br>integer |  | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sequencing_org_received_date</code></b></br>string | Date sample was received by the organisation which sequenced it. This date is used for tracking sample turnaround time. | <ul></ul>
+
+
+### Metadata
+
+<blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>
+```shell--ocarina
+ocarina put library \
+	...
+	-m artic primers 3 \
+	-m artic protocol 'v3 (LoCost)' 
+```
+<blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
+<ul><li><code>artic primers</code> ▶ <code>artic_primers</code></li>
+<li><code>artic protocol</code> ▶ <code>artic_protocol</code></li></ul>
+</blockquote>
+Any artifact in Majora can be 'tagged' with arbitrary key-value metadata.
+Unlike Metrics, there is no fixed terminology or validation on the keys or their values. Like Metrics, to aid organisation, metadata keys are grouped into namespaces.
+This endpoint has 'reserved' metadata keys that should only be used to provide meaningful information:
+
+Namespace | Name | Description | Options
+--- | ---- | ----------- | -------
+<b><code>artic</code></b> | <b><code>artic_primers</code></b> | The version number of the ARTIC primer set (if used) to prepare this library | <ul></ul>
+<b><code>artic</code></b> | <b><code>artic_protocol</code></b> | The version number of the ARTIC protocol (if used) to prepare this library | <ul></ul>
+
+

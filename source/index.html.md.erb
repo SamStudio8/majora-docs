@@ -1,0 +1,64 @@
+---
+title: API Reference
+
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell--ocarina: ocarina
+  - plaintext--uploader: uploader
+  - json--raw: json
+  - python: python
+
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+
+includes:
+  - errors
+
+search: true
+
+code_clipboard: true
+---
+
+
+# Introduction
+
+## Malleable All-seeing Journal Of Research Artifacts
+
+Majora is a Django-based wet-and-dry information management system. Majora is being rapidly developed as part of the COVID-19 Genomics UK Consortium (COG-UK) response to the outbreak of SARS-CoV-2.
+
+Majora is a system that stores metadata on biological samples, sequencing runs, bioinformatics pipelines and files. These different items are referred to generally, as "artifacts". Majora is composed of three main parts:
+
+* a database that defines "models" that represent artifacts such as samples and files,
+* a web interface that allows access to basic metadata shared about artifacts,
+* an "API" that provides an interface for other tools and programs to view and edit information about artifacts
+
+This documentation attempts to cover all bases by showing all the fields for each of the artifacts and processes that can be added, updated and retrieved from Majora.
+Although intended primarily for users who wish to write a computer program to use the API or users of the [Ocarina command line tool](https://github.com/SamStudio8/ocarina/), it should be useful for users of the CGPS metadata uploader.
+Users of the uploader will likely also want to refer to the documentation for the [metadata uploader](https://metadata.docs.cog-uk.io/).
+
+You may be interested to know that this API documentation page was created with [Slate](https://github.com/slatedocs/slate).
+
+## Important notes
+
+* Submitting a request for an artifact that already exists will allow you to change some properties of that object. The messages response will let you know if this is not the case.
+* Sending a request to update an artifact that already exists is an overwriting operation. If you submit blank fields, those fields will be irreversibly deleted from the model.
+* If metadata is missing, send a blank field or do not submit the field at all. Do not submit 'unknown' or 'null' or any other text that attempts to explain that the field is missing.
+
+
+# Authentication
+
+* [Authentication with the CGPS Uploader](https://metadata.docs.cog-uk.io/bulk-upload-1)
+* [Authentication with Ocarina (API key)](https://github.com/SamStudio8/ocarina#configuration)
+* [Authentication with Ocarina (OAuth)](https://docs.covid19.climb.ac.uk/oauth-app)
+
+# Biosamples
+
+<%= partial "includes/api_artifact_biosample_add.md.erb" %>
+
+# Library
+
+<%= partial "includes/api_artifact_library_add.md.erb" %>
+
+# Sequencing
+
+<%= partial "includes/api_process_sequencing_add.md.erb" %>
