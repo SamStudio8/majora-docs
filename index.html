@@ -492,7 +492,7 @@ Users of the uploader will likely also want to refer to the documentation for th
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>adm1</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td>Code of UK home nation of the patient from which the sample was collected</td>
-<td><ul><li><code>UK-ENG</code></li><li><code>UK-SCT</code></li><li><code>UK-WLS</code></li><li><code>UK-NIR</code></li></ul></td>
+<td><ul><li><code>UK-ENG</code></li><li><code>UK-NIR</code></li><li><code>UK-SCT</code></li><li><code>UK-WLS</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i></td>
@@ -507,7 +507,7 @@ Users of the uploader will likely also want to refer to the documentation for th
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>is_surveillance</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td>Whether this sample was collected under the COGUK surveillance protocol.</td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li></ul></td>
+<td><ul><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#000; background-color:#ffc107'>received_date</code></b></br>string, <i>possibly required</i></td>
@@ -552,7 +552,7 @@ Users of the uploader will likely also want to refer to the documentation for th
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>admitted_with_covid_diagnosis</code></b></br>string, <i>enum</i></td>
 <td>If is_hospital_patient, whether the patient was admitted with a COVID diagnosis</td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>anonymised_care_home_code</code></b></br>string</td>
@@ -587,27 +587,27 @@ Users of the uploader will likely also want to refer to the documentation for th
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>is_care_home_resident</code></b></br>string, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>is_care_home_worker</code></b></br>string, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>is_hcw</code></b></br>string, <i>enum</i></td>
 <td>Whether the sample was collected from a healthcare worker. This includes hospital-associated workers.</td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>is_hospital_patient</code></b></br>string, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>is_icu_patient</code></b></br>string, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>root_sample_id</code></b></br>string</td>
@@ -617,12 +617,12 @@ Users of the uploader will likely also want to refer to the documentation for th
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>sample_type_collected</code></b></br>string, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>dry swab</code></li><li><code>swab</code></li><li><code>sputum</code></li><li><code>BAL</code></li><li><code>aspirate</code></li></ul></td>
+<td><ul><li><code>BAL</code></li><li><code>aspirate</code></li><li><code>dry swab</code></li><li><code>sputum</code></li><li><code>swab</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>sample_type_received</code></b></br>string, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>primary</code></li><li><code>extract</code></li><li><code>culture</code></li><li><code>lysate</code></li></ul></td>
+<td><ul><li><code>culture</code></li><li><code>extract</code></li><li><code>lysate</code></li><li><code>primary</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>sender_sample_id</code></b></br>string</td>
@@ -632,7 +632,7 @@ Users of the uploader will likely also want to refer to the documentation for th
 <tr>
 <td><b><code style='color:#fff; background-color:#6c757d'>swab_site</code></b></br>string, <i>enum</i></td>
 <td>Required if sample_type_collected is swab</td>
-<td><ul><li><code>nose</code></li><li><code>throat</code></li><li><code>nose-throat</code></li><li><code>endotracheal</code></li><li><code>rectal</code></li></ul></td>
+<td><ul><li><code>endotracheal</code></li><li><code>nose</code></li><li><code>nose-throat</code></li><li><code>rectal</code></li><li><code>throat</code></li></ul></td>
 </tr>
 </tbody></table>
 <h3 id='metrics'>Metrics</h3>
@@ -676,19 +676,19 @@ This endpoint allows you to submit the following Metrics:</p>
 <td><b><code>ct</code></b></td>
 <td><b><code>test_kit</code></b></td>
 <td></td>
-<td><ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>TAQPATH_HT</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>ABBOTT</code></li><li><code>ALINITY</code></li><li><code>ALTONA</code></li><li><code>AMPLIDIAG</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BD</code></li><li><code>BOSPHORE</code></li><li><code>INHOUSE</code></li><li><code>QIASTAT</code></li><li><code>ROCHE</code></li><li><code>SEEGENE</code></li><li><code>TAQPATH_HT</code></li><li><code>VIASURE</code></li><li><code>XPERT</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code>ct</code></b></td>
 <td><b><code>test_platform</code></b></td>
 <td></td>
-<td><ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>THERMO_AMPLITUDE</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>ABBOTT_M2000</code></li><li><code>ALTONA</code></li><li><code>ALTOSTAR_AM16</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BD_MAX</code></li><li><code>CEPHEID_XPERT</code></li><li><code>ELITE_INGENIUS</code></li><li><code>INHOUSE</code></li><li><code>PANTHER</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>QIASTAT_DX</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>THERMO_AMPLITUDE</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code>ct</code></b></td>
 <td><b><code>test_target</code></b></td>
 <td></td>
-<td><ul><li><code>E</code></li><li><code>N</code></li><li><code>S</code></li><li><code>RDRP</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP+N</code></li><li><code>(blank)</code></li></ul></td>
+<td><ul><li><code>(blank)</code></li><li><code>E</code></li><li><code>N</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP</code></li><li><code>RDRP+N</code></li><li><code>S</code></li></ul></td>
 </tr>
 </tbody></table>
 <h3 id='metadata'>Metadata</h3>
@@ -746,9 +746,7 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 </tbody></table>
 <h1 id='library'>Library</h1><h2 id='add-a-sequencing-library-to-majora'>Add a sequencing library to Majora</h2>
 <p><code>/artifact/library/add/</code></p>
-<h3 id='attributes-2'>Attributes</h3>
-<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
-<div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+<h3 id='attributes-2'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
@@ -822,7 +820,7 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>library_layout_config</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>SINGLE</code></li><li><code>PAIRED</code></li></ul></td>
+<td><ul><li><code>PAIRED</code></li><li><code>SINGLE</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i></td>
@@ -832,7 +830,7 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>library_selection</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>RANDOM</code></li><li><code>PCR</code></li><li><code>RANDOM_PCR</code></li><li><code>OTHER</code></li></ul></td>
+<td><ul><li><code>OTHER</code></li><li><code>PCR</code></li><li><code>RANDOM</code></li><li><code>RANDOM_PCR</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>library_seq_kit</code></b></br>string, <i>required</i></td>
@@ -847,12 +845,12 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>library_source</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>GENOMIC</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li><li><code>OTHER</code></li></ul></td>
+<td><ul><li><code>GENOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>OTHER</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>library_strategy</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>WGA</code></li><li><code>WGS</code></li><li><code>AMPLICON</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>OTHER</code></li></ul></td>
+<td><ul><li><code>AMPLICON</code></li><li><code>OTHER</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>WGA</code></li><li><code>WGS</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#17a2b8'>library_primers</code></b></br>string, <i>recommended</i></td>
@@ -924,9 +922,7 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 </tbody></table>
 <h1 id='sequencing'>Sequencing</h1><h2 id='add-a-sequencing-run-to-majora'>Add a sequencing run to Majora</h2>
 <p><code>/process/sequencing/add/</code></p>
-<h3 id='attributes-3'>Attributes</h3>
-<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
-<div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+<h3 id='attributes-3'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"library_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOOT-LIBRARY-20200322"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"runs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"bioinfo_pipe_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC Pipeline (iVar)"</span><span class="p">,</span><span class="w">
@@ -979,7 +975,7 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>ILLUMINA</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li><li><code>ION_TORRENT</code></li></ul></td>
+<td><ul><li><code>ILLUMINA</code></li><li><code>ION_TORRENT</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>instrument_model</code></b></br>string, <i>required</i></td>
