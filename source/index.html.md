@@ -52,13 +52,70 @@ You may be interested to know that this API documentation page was created with 
 * [Authentication with Ocarina (OAuth)](https://docs.covid19.climb.ac.uk/oauth-app)
 
 # Biosamples
-
 ## Add one or more biosamples to Majora
 
 <code>/artifact/biosample/add/</code>
 
 
 ### Attributes
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+```json--raw
+{
+    "biosamples": {
+        "adm1": "UK-ENG",
+        "adm2": "Birmingham",
+        "adm2_private": "B20",
+        "admitted_date": null,
+        "admitted_hospital_name": null,
+        "admitted_hospital_trust_or_board": null,
+        "admitted_with_covid_diagnosis": null,
+        "anonymised_care_home_code": null,
+        "biosample_source_id": "ABC12345",
+        "central_sample_id": "BIRM-12345",
+        "collecting_org": "Hypothetical University of Hooting",
+        "collection_date": "2020-06-03",
+        "collection_pillar": "2",
+        "employing_hospital_name": null,
+        "employing_hospital_trust_or_board": null,
+        "is_care_home_resident": null,
+        "is_care_home_worker": null,
+        "is_hcw": null,
+        "is_hospital_patient": null,
+        "is_icu_patient": null,
+        "is_surveillance": "Y",
+        "metadata": {
+            "epi": {
+                "epi_cluster": "CLUSTER8"
+            },
+            "investigation": {
+                "investigation_cluster": "Ward 0",
+                "investigation_name": "West Midlands HCW",
+                "investigation_site": "QEHB"
+            }
+        },
+        "metrics": {
+            "ct": {
+                "records": {
+                    "ct_value": "25",
+                    "test_kit": "INHOUSE",
+                    "test_platform": "INHOUSE",
+                    "test_target": "ORF8"
+                }
+            }
+        },
+        "received_date": "2020-06-04",
+        "root_sample_id": "PHA12345",
+        "sample_type_collected": "swab",
+        "sample_type_received": "primary",
+        "sender_sample_id": "LAB12345",
+        "source_age": "29",
+        "source_sex": "F",
+        "swab_site": "nose-throat"
+    },
+    "token": "6e06392f-e030-4cf9-911a-8dc9f2d4e714",
+    "username": "majora-sam"
+}
+```
 <blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
 ```shell--ocarina
 ocarina put biosample \
@@ -111,7 +168,7 @@ Name | Description | Options
 <b><code style='color:#fff; background-color:#6c757d'>anonymised_care_home_code</code></b></br>string | A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>biosample_source_id</code></b></br>string | A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.</br><aside class='warning' style='padding: 1em'>Do not provide personally identifying information here. Never use an NHS number.</aside> | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>collecting_org</code></b></br>string | The site (eg. hospital or surgery) that this sample was originally collected by. | <ul></ul>
-<b><code style='color:#fff; background-color:#6c757d'>collection_pillar</code></b></br>integer | The pillar under which this sample was collected (e.g. 1, 2). This is likely 1, but leave blank if unsure. | <ul></ul>
+<b><code style='color:#fff; background-color:#6c757d'>collection_pillar</code></b></br>integer, <i>enum</i> | The pillar under which this sample was collected (e.g. 1, 2). This is likely 1, but leave blank if unsure. | <ul><li><code>1</code></li><li><code>2</code></li><li><code>103</code></li><li><code>34613</code></li></ul>
 <b><code style='color:#fff; background-color:#6c757d'>employing_hospital_name</code></b></br>string | If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>employing_hospital_trust_or_board</code></b></br>string | If is_hcw, provide the name of the employing trust or board. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>is_care_home_resident</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
@@ -151,8 +208,8 @@ This endpoint allows you to submit the following Metrics:
 Namespace | Name | Description | Options
 --- | ---- | ----------- | -------
 <b><code>ct</code></b> | <b><code>ct_value</code></b> | Cycle threshold value. Cannot be negative. Code an inconclusive or negative test as 0. | <ul></ul>
-<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>(blank)</code></li><li><code>TAQPATH_HT</code></li></ul>
-<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>(blank)</code></li><li><code>THERMO_AMPLITUDE</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>TAQPATH_HT</code></li><li><code>(blank)</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>THERMO_AMPLITUDE</code></li><li><code>(blank)</code></li></ul>
 <b><code>ct</code></b> | <b><code>test_target</code></b> |  | <ul><li><code>E</code></li><li><code>N</code></li><li><code>S</code></li><li><code>RDRP</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP+N</code></li><li><code>(blank)</code></li></ul>
 
 
@@ -184,6 +241,7 @@ Namespace | Name | Description | Options
 <b><code>investigation</code></b> | <b><code>investigation_name</code></b> | A named investigation (eg. a surveillance or directed case group) | <ul></ul>
 <b><code>investigation</code></b> | <b><code>investigation_site</code></b> | An optional site name or code to differentiate between sites if the investigation covers more than one site. | <ul></ul>
 
+
 # Library
 ## Add a sequencing library to Majora
 
@@ -191,6 +249,36 @@ Namespace | Name | Description | Options
 
 
 ### Attributes
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+```json--raw
+{
+    "biosamples": {
+        "barcode": "02",
+        "central_sample_id": "BIRM-12345",
+        "library_primers": "ARTIC v3",
+        "library_protocol": "ARTIC v3 (LoCost)",
+        "library_selection": "PCR",
+        "library_source": "VIRAL_RNA",
+        "library_strategy": "AMPLICON",
+        "metadata": {
+            "artic": {
+                "artic_primers": "3",
+                "artic_protocol": "v3 (LoCost)"
+            }
+        },
+        "sequencing_org_received_date": "2021-01-14"
+    },
+    "library_layout_config": "PAIRED",
+    "library_layout_insert_length": 100,
+    "library_layout_read_length": 300,
+    "library_name": "HOOT-LIBRARY-20200322",
+    "library_seq_kit": "Illumina MiSeq v3",
+    "library_seq_protocol": "MiSeq 150 Cycle",
+    "metadata": {},
+    "token": "6e06392f-e030-4cf9-911a-8dc9f2d4e714",
+    "username": "majora-sam"
+}
+```
 <blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
 ```shell--ocarina
 ocarina put library \
@@ -273,6 +361,25 @@ Namespace | Name | Description | Options
 
 ### Attributes
 <blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+```json--raw
+{
+    "library_name": "HOOT-LIBRARY-20200322",
+    "runs": {
+        "bioinfo_pipe_name": "ARTIC Pipeline (iVar)",
+        "bioinfo_pipe_version": "1.3.0",
+        "end_time": "YYYY-MM-DD HH:MM",
+        "flowcell_id": "ABCDEF",
+        "flowcell_type": "v3",
+        "instrument_make": "ILLUMINA",
+        "instrument_model": "MiSeq",
+        "run_name": "YYMMDD_AB000000_1234_ABCDEFGHI0",
+        "start_time": "YYYY-MM-DD HH:MM"
+    },
+    "token": "6e06392f-e030-4cf9-911a-8dc9f2d4e714",
+    "username": "majora-sam"
+}
+```
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
 ```shell--ocarina
 ocarina put sequencing \
 	--instrument-make ILLUMINA \
@@ -300,7 +407,7 @@ ocarina put sequencing \
 
 Name | Description | Options
 ---- | ----------- | -------
-<b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>ILLUMINA</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>ILLUMINA</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li><li><code>ION_TORRENT</code></li></ul>
 <b><code style='color:#fff; background-color:#dc3545'>instrument_model</code></b></br>string, <i>required</i> |  | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i> | The name of the library as submitted to add_library | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>run_name</code></b></br>string, <i>required</i> | A unique name that corresponds to your run. Ideally, use the name generated by your sequencing instrument. | <ul></ul>
