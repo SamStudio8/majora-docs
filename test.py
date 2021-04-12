@@ -55,7 +55,7 @@ def flatten_object(spec, prefix=""):
                     "required": field in sspec.get("required", []),
                     "x-priority": field_spec.get("x-priority", 100),
                     "description": field_spec.get("description", ""),
-                    "enum": [x if x else "(blank)" for x in field_spec.get("enum", [])],
+                    "enum": sorted([x if x else "(blank)" for x in field_spec.get("enum", [])]),
                     "example": str(field_spec.get("example", "unknown")),
                     "json_example": field_spec.get("example"),
                     "x-ocarina-param": field_spec.get("x-ocarina-param", "NA"),
@@ -266,7 +266,6 @@ for path, spec in spec["paths"].items():
 
 
         if json_example:
-            print("""<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>""")
             print("```json--raw")
             print(json.dumps(json_example, indent=4, sort_keys=True))
             print("```")
