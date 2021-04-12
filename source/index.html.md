@@ -58,7 +58,7 @@ You may be interested to know that this API documentation page was created with 
 
 
 ### Attributes
-<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+
 ```json--raw
 {
     "biosamples": {
