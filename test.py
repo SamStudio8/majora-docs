@@ -171,24 +171,28 @@ def insert_path(node, path, v_type, v):
 
 
 for path, spec in spec["paths"].items():
+    spec = spec["post"] # handle POST first for now
+
+    lines = []
+
     #print(spec['post'].keys())
     #print(spec['post']['tags'])
 
     metadata = metrics = 0
 
-    print("## %s" % spec['post']['summary'])
+    lines.append("## %s" % spec['summary'])
 
-    print("\n<code>%s</code>" % path)
+    lines.append("\n<code>%s</code>" % path)
 
-    print("\n\n### Attributes")
-    cmd_head = "ocarina " + spec['post'].get('x-ocarina-cmd', "")
+    lines.append("\n\n### Attributes")
+    cmd_head = "ocarina " + spec.get('x-ocarina-cmd', "")
     cmd = []
     cmd_req = []
     cmd_no = []
     uploader_map = {}
 
     json_example = {}
-    for k, v in spec['post']['requestBody']['content']['application/json']['schema'].items():
+    for k, v in spec['requestBody']['content']['application/json']['schema'].items():
         for item in v:
             flat = flatten_object2(item)
             sort_flat = sorted(flat.items(), key=lambda x: (x[1].get("x-priority", 100), x[1].get("name")))
@@ -197,7 +201,7 @@ for path, spec in spec["paths"].items():
     #print(json_example)
 
 
-    for k, v in spec['post']['requestBody']['content']['application/json']['schema'].items():
+    for k, v in spec['requestBody']['content']['application/json']['schema'].items():
         for item in v:
             flat = flatten_object(item)
             sort_flat = sorted(flat.items(), key=lambda x: (x[1].get("x-priority", 100), x[1].get("name")))
@@ -266,27 +270,27 @@ for path, spec in spec["paths"].items():
 
 
         if json_example:
-            print("```json--raw")
-            print(json.dumps(json_example, indent=4, sort_keys=True))
-            print("```")
+            lines.append("```json--raw")
+            lines.append(json.dumps(json_example, indent=4, sort_keys=True))
+            lines.append("```")
 
 
-        if spec["post"].get("x-ocarina-cmd", ""):
-            if spec["post"]["x-ocarina-cmd"]:
+        if spec.get("x-ocarina-cmd", ""):
+            if spec["x-ocarina-cmd"]:
                 if len(cmd) > 0:
                     cmd[-1] = cmd[-1][:-1]
                     cmd_req[-1] = cmd_req[-1][:-1]
-                print("""<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>""")
-                print("```shell--ocarina")
-                print(cmd_head + ' \\' )
-                print('\n'.join(cmd_req))
-                print("```")
+                lines.append("""<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>""")
+                lines.append("```shell--ocarina")
+                lines.append(cmd_head + ' \\' )
+                lines.append('\n'.join(cmd_req))
+                lines.append("```")
 
-                print("""<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>""")
-                print("```shell--ocarina")
-                print(cmd_head + ' \\' )
-                print('\n'.join(cmd))
-                print("```")
+                lines.append("""<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>""")
+                lines.append("```shell--ocarina")
+                lines.append(cmd_head + ' \\' )
+                lines.append('\n'.join(cmd))
+                lines.append("```")
 
                 if len(nargs) > 0:
                     note_str = []
@@ -295,44 +299,44 @@ for path, spec in spec["paths"].items():
                             curr_note_pos_names = ["<code>%s</code>" % s for s in narg_note_list]
                             note_str.append("<li><code>%s</code> ▶ %s</li>" % (narg_note_name, ' '.join(curr_note_pos_names)))
 
-                    print("""<blockquote class="lang-specific shell--ocarina"><p>Attributes merged into positional arguments by Ocarina:<ul>""")
+                    lines.append("""<blockquote class="lang-specific shell--ocarina"><p>Attributes merged into positional arguments by Ocarina:<ul>""")
                     for s in note_str:
-                        print(s)
-                    print("""</ul></blockquote>""")
+                        lines.append(s)
+                    lines.append("""</ul></blockquote>""")
 
                 if len(cmd_no) > 0:
-                    print("""<blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: %s</p></blockquote>""" % ', '.join(["<code style='word-break: normal'>%s</code>" % f for f in cmd_no]))
+                    lines.append("""<blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: %s</p></blockquote>""" % ', '.join(["<code style='word-break: normal'>%s</code>" % f for f in cmd_no]))
 
             else:
-                print("""<blockquote class="lang-specific shell--ocarina"><p>Function not currently implemented in Ocarina command line interface</p></blockquote>""")
+                lines.append("""<blockquote class="lang-specific shell--ocarina"><p>Function not currently implemented in Ocarina command line interface</p></blockquote>""")
         else:
-            print("""<blockquote class="lang-specific shell--ocarina"><p>Function not currently implemented in Ocarina command line interface</p></blockquote>""")
+            lines.append("""<blockquote class="lang-specific shell--ocarina"><p>Function not currently implemented in Ocarina command line interface</p></blockquote>""")
 
-        if spec["post"].get("x-ocarina-api", ""):
-            if spec["post"]["x-ocarina-api"]:
+        if spec.get("x-ocarina-api", ""):
+            if spec["x-ocarina-api"]:
                 pass
             else:
-                print("""<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>""")
+                lines.append("""<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>""")
         else:
-            print("""<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>""")
+            lines.append("""<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>""")
 
 
-        if spec["post"].get("x-uploader-doc", ""):
-            if spec["post"]["x-uploader-doc"]:
-                print("""<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="%s">%s</a></p></blockquote>""" % (spec["post"]["x-uploader-doc"], spec["post"]["x-uploader-doc"]))
-                print("""<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>""")
+        if spec.get("x-uploader-doc", ""):
+            if spec["x-uploader-doc"]:
+                lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="%s">%s</a></p></blockquote>""" % (spec["x-uploader-doc"], spec["x-uploader-doc"]))
+                lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>""")
 
                 if len(uploader_map) > 0:
-                    print("""<blockquote class="lang-specific plaintext--uploader"><p>Some attributes are named differently on the CGPS uploader:</p>""")
-                    print("<ul>%s</ul>" % '\n'.join(["<li><code>%s</code> ▶ <code>%s</code></li>" % (k, v) for k, v in uploader_map.items()]))
-                    print("</blockquote>")
+                    lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>Some attributes are named differently on the CGPS uploader:</p>""")
+                    lines.append("<ul>%s</ul>" % '\n'.join(["<li><code>%s</code> ▶ <code>%s</code></li>" % (k, v) for k, v in uploader_map.items()]))
+                    lines.append("</blockquote>")
             else:
-                print("""<blockquote class="lang-specific plaintext--uploader"><p>Function not currently implemented in CGPS Metadata Uploader</p></blockquote>""")
+                lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>Function not currently implemented in CGPS Metadata Uploader</p></blockquote>""")
         else:
-            print("""<blockquote class="lang-specific plaintext--uploader"><p>Function not currently implemented in CGPS Metadata Uploader</p></blockquote>""")
+            lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>Function not currently implemented in CGPS Metadata Uploader</p></blockquote>""")
 
-        print("\nName | Description | Options")
-        print("---- | ----------- | -------")
+        lines.append("\nName | Description | Options")
+        lines.append("---- | ----------- | -------")
         for kp, vp in sort_flat:
             if "metric" in vp["path"] or "metadata" in vp["path"] or vp.get("x-ocarina-nargs-root"):
                 continue
@@ -347,7 +351,7 @@ for path, spec in spec["paths"].items():
             if vp.get("x-ocarina-warning"):
                 aside = "<aside class='warning' style='padding: 1em'>%s</aside>" % vp["x-ocarina-warning"]
 
-            print(' | '.join([str(x) for x in [
+            lines.append(' | '.join([str(x) for x in [
                 name + '</br>' + field_description,
                 #vp["path"],
                 vp.get("description", "").replace('\n', "</br>") + aside,
@@ -356,7 +360,7 @@ for path, spec in spec["paths"].items():
 
 
     if metrics > 0:
-        print("\n\n### Metrics")
+        lines.append("\n\n### Metrics")
         cmd_metric = []
         uploader_map = {}
         for kp, vp in sort_flat:
@@ -373,34 +377,34 @@ for path, spec in spec["paths"].items():
             if vp.get("x-uploader-column"):
                 uploader_map["%s %s" % (vp.get("x-ocarina-namespace"), vp.get("x-ocarina-param"))] = "%s%s" % (vp.get("x-uploader-column"), " (limit %d)" % vp.get("x-uploader-limit") if vp.get("x-uploader-limit") else "")
 
-        if spec["post"].get("x-ocarina-cmd", ""):
-            if spec["post"]["x-ocarina-cmd"]:
+        if spec.get("x-ocarina-cmd", ""):
+            if spec["x-ocarina-cmd"]:
                 if len(cmd_metric) > 0:
                     cmd_metric[-1] = cmd_metric[-1][:-1]
-                print("""<blockquote class="lang-specific shell--ocarina"><p>To provide metrics with Ocarina:</p></blockquote>""")
-                print("```shell--ocarina")
-                print(cmd_head + ' \\' )
-                print("\t...")
-                print('\n'.join(cmd_metric))
-                print("```")
-                print("""<blockquote class="lang-specific shell--ocarina"><p>If a particular metric supports storing multiple records, you can provide them by incrementing a numerical suffix after the metric's namespace: <i>e.g.</i> <code>--metric name.1 key value</code> ... <code>--metric name.N key value.</code></blockquote>""")
+                lines.append("""<blockquote class="lang-specific shell--ocarina"><p>To provide metrics with Ocarina:</p></blockquote>""")
+                lines.append("```shell--ocarina")
+                lines.append(cmd_head + ' \\' )
+                lines.append("\t...")
+                lines.append('\n'.join(cmd_metric))
+                lines.append("```")
+                lines.append("""<blockquote class="lang-specific shell--ocarina"><p>If a particular metric supports storing multiple records, you can provide them by incrementing a numerical suffix after the metric's namespace: <i>e.g.</i> <code>--metric name.1 key value</code> ... <code>--metric name.N key value.</code></blockquote>""")
 
         if len(uploader_map) > 0:
-            print("""<blockquote class="lang-specific plaintext--uploader"><p>Some metrics can be provided via the uploader using these column names:</p>""")
-            print("<ul>%s</ul>" % '\n'.join(["<li><code>%s</code> ▶ <code>%s</code></li>" % (k, v) for k, v in uploader_map.items()]))
-            print("</blockquote>")
+            lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>Some metrics can be provided via the uploader using these column names:</p>""")
+            lines.append("<ul>%s</ul>" % '\n'.join(["<li><code>%s</code> ▶ <code>%s</code></li>" % (k, v) for k, v in uploader_map.items()]))
+            lines.append("</blockquote>")
 
-        print("Some artifacts in Majora can be annotated with additional Metric objects.")
-        print("Metric objects group together specific information that allows for additional description of an artifact, but does not belong in the artifact itself.")
-        print("Each metric has its own namespace, containing a fixed set of keys. Some or all of the keys may need a value to validate the Metric.")
-        print("This endpoint allows you to submit the following Metrics:")
+        lines.append("Some artifacts in Majora can be annotated with additional Metric objects.")
+        lines.append("Metric objects group together specific information that allows for additional description of an artifact, but does not belong in the artifact itself.")
+        lines.append("Each metric has its own namespace, containing a fixed set of keys. Some or all of the keys may need a value to validate the Metric.")
+        lines.append("This endpoint allows you to submit the following Metrics:")
 
-        print("\nNamespace | Name | Description | Options")
-        print("--- | ---- | ----------- | -------")
+        lines.append("\nNamespace | Name | Description | Options")
+        lines.append("--- | ---- | ----------- | -------")
         for kp, vp in sort_flat:
             if "metric" not in vp["path"]:
                 continue
-            print(' | '.join([str(x) for x in [
+            lines.append(' | '.join([str(x) for x in [
                 "<b><code>%s</code></b>" % vp["x-ocarina-namespace"],
                 "<b><code>%s</code></b>" % vp["name"],
                 vp.get("description", "").replace('\n', "</br>"),
@@ -408,7 +412,7 @@ for path, spec in spec["paths"].items():
             ]]))
 
     if metadata > 0:
-        print("\n\n### Metadata\n")
+        lines.append("\n\n### Metadata\n")
         cmd_meta = []
         uploader_map = {}
         for kp, vp in sort_flat:
@@ -425,38 +429,39 @@ for path, spec in spec["paths"].items():
             if vp.get("x-uploader-column"):
                 uploader_map["%s %s" % (vp.get("x-ocarina-namespace"), vp.get("x-ocarina-param"))] = "%s%s" % (vp.get("x-uploader-column"), " (limit %d)" % vp.get("x-uploader-limit") if vp.get("x-uploader-limit") else "")
 
-        if spec["post"].get("x-ocarina-cmd", ""):
-            if spec["post"]["x-ocarina-cmd"]:
+        if spec.get("x-ocarina-cmd", ""):
+            if spec["x-ocarina-cmd"]:
                 if len(cmd_meta) > 0:
                     cmd_meta[-1] = cmd_meta[-1][:-1]
-                print("""<blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>""")
-                print("```shell--ocarina")
-                print(cmd_head + ' \\' )
-                print("\t...")
-                print('\n'.join(cmd_meta))
-                print("```")
+                lines.append("""<blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>""")
+                lines.append("```shell--ocarina")
+                lines.append(cmd_head + ' \\' )
+                lines.append("\t...")
+                lines.append('\n'.join(cmd_meta))
+                lines.append("```")
 
         if len(uploader_map) > 0:
-            print("""<blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>""")
-            print("<ul>%s</ul>" % '\n'.join(["<li><code>%s</code> ▶ <code>%s</code></li>" % (k, v) for k, v in uploader_map.items()]))
-            print("</blockquote>")
+            lines.append("""<blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>""")
+            lines.append("<ul>%s</ul>" % '\n'.join(["<li><code>%s</code> ▶ <code>%s</code></li>" % (k, v) for k, v in uploader_map.items()]))
+            lines.append("</blockquote>")
 
-        print("Any artifact in Majora can be 'tagged' with arbitrary key-value metadata.")
-        print("Unlike Metrics, there is no fixed terminology or validation on the keys or their values. Like Metrics, to aid organisation, metadata keys are grouped into namespaces.")
-        print("This endpoint has 'reserved' metadata keys that should only be used to provide meaningful information:")
+        lines.append("Any artifact in Majora can be 'tagged' with arbitrary key-value metadata.")
+        lines.append("Unlike Metrics, there is no fixed terminology or validation on the keys or their values. Like Metrics, to aid organisation, metadata keys are grouped into namespaces.")
+        lines.append("This endpoint has 'reserved' metadata keys that should only be used to provide meaningful information:")
 
-        print("\nNamespace | Name | Description | Options")
-        print("--- | ---- | ----------- | -------")
+        lines.append("\nNamespace | Name | Description | Options")
+        lines.append("--- | ---- | ----------- | -------")
         for kp, vp in sort_flat:
             if "metadata" not in vp["path"]:
                 continue
-            print(' | '.join([str(x) for x in [
+            lines.append(' | '.join([str(x) for x in [
                 "<b><code>%s</code></b>" % vp["x-ocarina-namespace"],
                 "<b><code>%s</code></b>" % vp["name"],
                 vp.get("description", "").replace('\n', "</br>"),
                 "<ul>" + ''.join(["<li><code>%s</code></li>" % f for f in vp.get("enum", "")]) + "</ul>",
             ]]))
 
+    lines.append("\n\n")
 
-
-    print("\n\n")
+    with open("includes/%s.md.erb" % spec["operationId"].replace('.', '_'), 'w') as include_fh:
+        include_fh.write('\n'.join(lines))

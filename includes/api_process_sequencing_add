@@ -1,0 +1,103 @@
+<h2 id='add-a-sequencing-run-to-majora'>Add a sequencing run to Majora</h2>
+<p><code>/process/sequencing/add/</code></p>
+<h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"library_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOOT-LIBRARY-20200322"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"runs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"bioinfo_pipe_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC Pipeline (iVar)"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bioinfo_pipe_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYYY-MM-DD HH:MM"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"flowcell_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABCDEF"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"flowcell_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instrument_make"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ILLUMINA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instrument_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MiSeq"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"run_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYMMDD_AB000000_1234_ABCDEFGHI0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYYY-MM-DD HH:MM"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6e06392f-e030-4cf9-911a-8dc9f2d4e714"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"majora-sam"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put sequencing <span class="se">\</span>
+    <span class="nt">--instrument-make</span> ILLUMINA <span class="se">\</span>
+    <span class="nt">--instrument-model</span> MiSeq <span class="se">\</span>
+    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">\</span>
+    <span class="nt">--run-name</span> YYMMDD_AB000000_1234_ABCDEFGHI0 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put sequencing <span class="se">\</span>
+    <span class="nt">--instrument-make</span> ILLUMINA <span class="se">\</span>
+    <span class="nt">--instrument-model</span> MiSeq <span class="se">\</span>
+    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">\</span>
+    <span class="nt">--run-name</span> YYMMDD_AB000000_1234_ABCDEFGHI0 <span class="se">\</span>
+    <span class="nt">--bioinfo-pipe-name</span> <span class="s1">'ARTIC Pipeline (iVar)'</span> <span class="se">\</span>
+    <span class="nt">--bioinfo-pipe-version</span> 1.3.0 <span class="se">\</span>
+    <span class="nt">--end-time</span> <span class="s1">'YYYY-MM-DD HH:MM'</span> <span class="se">\</span>
+    <span class="nt">--flowcell-id</span> ABCDEF <span class="se">\</span>
+    <span class="nt">--flowcell-type</span> v3 <span class="se">\</span>
+    <span class="nt">--start-time</span> <span class="s1">'YYYY-MM-DD HH:MM'</span> 
+</code></pre></div>
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+
+<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing">https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing</a></p></blockquote>
+
+<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>ILLUMINA</code></li><li><code>ION_TORRENT</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>instrument_model</code></b></br>string, <i>required</i></td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i></td>
+<td>The name of the library as submitted to add_library</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>run_name</code></b></br>string, <i>required</i></td>
+<td>A unique name that corresponds to your run. Ideally, use the name generated by your sequencing instrument.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#17a2b8'>bioinfo_pipe_name</code></b></br>string, <i>recommended</i></td>
+<td>The name of the bioinformatics pipeline used for downstream analysis of this run</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#17a2b8'>bioinfo_pipe_version</code></b></br>string, <i>recommended</i></td>
+<td>The version number of the bioinformatics pipeline used for downstream analysis of this run</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>end_time</code></b></br>string</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>flowcell_id</code></b></br>string</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>flowcell_type</code></b></br>None</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>start_time</code></b></br>string</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+</tbody></table>

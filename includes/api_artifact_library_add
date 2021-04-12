@@ -1,0 +1,176 @@
+<h2 id='add-a-sequencing-library-to-majora'>Add a sequencing library to Majora</h2>
+<p><code>/artifact/library/add/</code></p>
+<h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"library_primers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC v3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"library_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC v3 (LoCost)"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"library_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PCR"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"library_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRAL_RNA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"library_strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AMPLICON"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"artic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"artic_primers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"artic_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v3 (LoCost)"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"sequencing_org_received_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-01-14"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"library_layout_config"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAIRED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"library_layout_insert_length"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"library_layout_read_length"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"library_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOOT-LIBRARY-20200322"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"library_seq_kit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illumina MiSeq v3"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"library_seq_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MiSeq 150 Cycle"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6e06392f-e030-4cf9-911a-8dc9f2d4e714"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"majora-sam"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put library <span class="se">\</span>
+    <span class="nt">--biosample</span> BIRM-12345 VIRAL_RNA PCR AMPLICON <span class="s1">'ARTIC v3 (LoCost)'</span> <span class="s1">'ARTIC v3'</span> <span class="se">\</span>
+    <span class="nt">--library-layout-config</span> PAIRED <span class="se">\</span>
+    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">\</span>
+    <span class="nt">--library-seq-kit</span> <span class="s1">'Illumina MiSeq v3'</span> <span class="se">\</span>
+    <span class="nt">--library-seq-protocol</span> <span class="s1">'MiSeq 150 Cycle'</span> 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put library <span class="se">\</span>
+    <span class="nt">--biosample</span> BIRM-12345 VIRAL_RNA PCR AMPLICON <span class="s1">'ARTIC v3 (LoCost)'</span> <span class="s1">'ARTIC v3'</span> <span class="se">\</span>
+    <span class="nt">--library-layout-config</span> PAIRED <span class="se">\</span>
+    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">\</span>
+    <span class="nt">--library-seq-kit</span> <span class="s1">'Illumina MiSeq v3'</span> <span class="se">\</span>
+    <span class="nt">--library-seq-protocol</span> <span class="s1">'MiSeq 150 Cycle'</span> <span class="se">\</span>
+    <span class="nt">--library-layout-insert-length</span> 100 <span class="se">\</span>
+    <span class="nt">--library-layout-read-length</span> 300 <span class="se">\</span>
+    <span class="nt">--sequencing-org-received-date</span> 2021-01-14 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Attributes merged into positional arguments by Ocarina:<ul>
+<li><code>biosample</code> ▶ <code>central_sample_id</code> <code>library_source</code> <code>library_selection</code> <code>library_strategy</code> <code>library_protocol</code> <code>library_primers</code></li>
+</ul></blockquote>
+<blockquote class="lang-specific shell--ocarina"><p>Attributes currently unsupported by Ocarina: <code style='word-break: normal'>barcode</code></p></blockquote>
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing">https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing</a></p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>There may be some differences between this specification and the uploader, particularly for providing Metrics and Metadata. See the Metadata and Metrics sections below for column names that are compatible with the API spec.</p></blockquote>
+<blockquote class="lang-specific plaintext--uploader"><p>Some attributes are named differently on the CGPS uploader:</p>
+<ul><li><code>library_primers</code> ▶ <code>artic_primers</code></li>
+<li><code>library_protocol</code> ▶ <code>artic_protocol</code></li></ul>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i></td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_layout_config</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>PAIRED</code></li><li><code>SINGLE</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i></td>
+<td>A unique, somewhat memorable name for your library.</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_selection</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>OTHER</code></li><li><code>PCR</code></li><li><code>RANDOM</code></li><li><code>RANDOM_PCR</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_seq_kit</code></b></br>string, <i>required</i></td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_seq_protocol</code></b></br>string, <i>required</i></td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_source</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>GENOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>OTHER</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>library_strategy</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>AMPLICON</code></li><li><code>OTHER</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>WGA</code></li><li><code>WGS</code></li></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#17a2b8'>library_primers</code></b></br>string, <i>recommended</i></td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#17a2b8'>library_protocol</code></b></br>string, <i>recommended</i></td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>barcode</code></b></br>string</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>library_layout_insert_length</code></b></br>integer</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>library_layout_read_length</code></b></br>integer</td>
+<td></td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#6c757d'>sequencing_org_received_date</code></b></br>string</td>
+<td>Date sample was received by the organisation which sequenced it. This date is used for tracking sample turnaround time.</td>
+<td><ul></ul></td>
+</tr>
+</tbody></table>
+<h3 id='metadata'>Metadata</h3>
+<blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put library <span class="se">\</span>
+    ...
+    <span class="nt">-m</span> artic primers 3 <span class="se">\</span>
+    <span class="nt">-m</span> artic protocol <span class="s1">'v3 (LoCost)'</span> 
+</code></pre></div>
+<blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
+<ul><li><code>artic primers</code> ▶ <code>artic_primers</code></li>
+<li><code>artic protocol</code> ▶ <code>artic_protocol</code></li></ul>
+</blockquote>
+
+<p>Any artifact in Majora can be &#39;tagged&#39; with arbitrary key-value metadata.
+Unlike Metrics, there is no fixed terminology or validation on the keys or their values. Like Metrics, to aid organisation, metadata keys are grouped into namespaces.
+This endpoint has &#39;reserved&#39; metadata keys that should only be used to provide meaningful information:</p>
+
+<table><thead>
+<tr>
+<th>Namespace</th>
+<th>Name</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><b><code>artic</code></b></td>
+<td><b><code>artic_primers</code></b></td>
+<td>The version number of the ARTIC primer set (if used) to prepare this library</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code>artic</code></b></td>
+<td><b><code>artic_protocol</code></b></td>
+<td>The version number of the ARTIC protocol (if used) to prepare this library</td>
+<td><ul></ul></td>
+</tr>
+</tbody></table>

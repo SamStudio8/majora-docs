@@ -389,8 +389,11 @@ Users of the uploader will likely also want to refer to the documentation for th
 <li><a href="https://github.com/SamStudio8/ocarina#configuration">Authentication with Ocarina (API key)</a></li>
 <li><a href="https://docs.covid19.climb.ac.uk/oauth-app">Authentication with Ocarina (OAuth)</a></li>
 </ul>
-<h1 id='biosamples'>Biosamples</h1><h2 id='add-one-or-more-biosamples-to-majora'>Add one or more biosamples to Majora</h2>
+<h1 id='biosamples'>Biosamples</h1>
+<h2 id='add-one-or-more-biosamples-to-majora'>Add one or more biosamples to Majora</h2>
+
 <p><code>/artifact/biosample/add/</code></p>
+
 <h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK-ENG"</span><span class="p">,</span><span class="w">
@@ -636,7 +639,9 @@ Users of the uploader will likely also want to refer to the documentation for th
 </tr>
 </tbody></table>
 <h3 id='metrics'>Metrics</h3>
+
 <blockquote class="lang-specific shell--ocarina"><p>To provide metrics with Ocarina:</p></blockquote>
+
 <div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put biosample <span class="se">\</span>
     ...
     <span class="nt">--metric</span> ct.# ct_value 25 <span class="se">\</span>
@@ -644,6 +649,7 @@ Users of the uploader will likely also want to refer to the documentation for th
     <span class="nt">--metric</span> ct.# test_platform INHOUSE <span class="se">\</span>
     <span class="nt">--metric</span> ct.# test_target ORF8 
 </code></pre></div>
+
 <blockquote class="lang-specific shell--ocarina"><p>If a particular metric supports storing multiple records, you can provide them by incrementing a numerical suffix after the metric's namespace: <i>e.g.</i> <code>--metric name.1 key value</code> ... <code>--metric name.N key value.</code></blockquote>
 
 <blockquote class="lang-specific plaintext--uploader"><p>Some metrics can be provided via the uploader using these column names:</p>
@@ -691,8 +697,11 @@ This endpoint allows you to submit the following Metrics:</p>
 <td><ul><li><code>(blank)</code></li><li><code>E</code></li><li><code>N</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP</code></li><li><code>RDRP+N</code></li><li><code>S</code></li></ul></td>
 </tr>
 </tbody></table>
+
 <h3 id='metadata'>Metadata</h3>
+
 <blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>
+
 <div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put biosample <span class="se">\</span>
     ...
     <span class="nt">-m</span> epi cluster CLUSTER8 <span class="se">\</span>
@@ -700,6 +709,7 @@ This endpoint allows you to submit the following Metrics:</p>
     <span class="nt">-m</span> investigation name <span class="s1">'West Midlands HCW'</span> <span class="se">\</span>
     <span class="nt">-m</span> investigation site QEHB 
 </code></pre></div>
+
 <blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
 <ul><li><code>epi cluster</code> ▶ <code>epi_cluster</code></li>
 <li><code>investigation cluster</code> ▶ <code>investigation_cluster</code></li>
@@ -744,9 +754,12 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <td><ul></ul></td>
 </tr>
 </tbody></table>
-<h1 id='library'>Library</h1><h2 id='add-a-sequencing-library-to-majora'>Add a sequencing library to Majora</h2>
+<h1 id='library'>Library</h1>
+<h2 id='add-a-sequencing-library-to-majora'>Add a sequencing library to Majora</h2>
+
 <p><code>/artifact/library/add/</code></p>
-<h3 id='attributes-2'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+
+<h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
@@ -883,13 +896,16 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <td><ul></ul></td>
 </tr>
 </tbody></table>
-<h3 id='metadata-2'>Metadata</h3>
+<h3 id='metadata'>Metadata</h3>
+
 <blockquote class="lang-specific shell--ocarina"><p>To provide metadata with Ocarina:</p></blockquote>
+
 <div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put library <span class="se">\</span>
     ...
     <span class="nt">-m</span> artic primers 3 <span class="se">\</span>
     <span class="nt">-m</span> artic protocol <span class="s1">'v3 (LoCost)'</span> 
 </code></pre></div>
+
 <blockquote class="lang-specific plaintext--uploader"><p>Some metadata can be provided via the uploader using these column names:</p>
 <ul><li><code>artic primers</code> ▶ <code>artic_primers</code></li>
 <li><code>artic protocol</code> ▶ <code>artic_protocol</code></li></ul>
@@ -920,46 +936,49 @@ This endpoint has &#39;reserved&#39; metadata keys that should only be used to p
 <td><ul></ul></td>
 </tr>
 </tbody></table>
-<h1 id='sequencing'>Sequencing</h1><h2 id='add-a-sequencing-run-to-majora'>Add a sequencing run to Majora</h2>
+<h1 id='sequencing'>Sequencing</h1>
+<h2 id='add-a-sequencing-run-to-majora'>Add a sequencing run to Majora</h2>
+
 <p><code>/process/sequencing/add/</code></p>
-<h3 id='attributes-3'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"library_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOOT-LIBRARY-20200322"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"runs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"bioinfo_pipe_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC Pipeline (iVar)"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"bioinfo_pipe_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3.0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYYY-MM-DD HH:MM"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"flowcell_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABCDEF"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"flowcell_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v3"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"instrument_make"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ILLUMINA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"instrument_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MiSeq"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"run_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYMMDD_AB000000_1234_ABCDEFGHI0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYYY-MM-DD HH:MM"</span><span class="w">
+
+<p><h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">&quot;library_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HOOT-LIBRARY-20200322&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">&quot;runs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">&quot;bioinfo_pipe_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ARTIC Pipeline (iVar)&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;bioinfo_pipe_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;end_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YYYY-MM-DD HH:MM&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;flowcell_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABCDEF&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;flowcell_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v3&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;instrument_make&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ILLUMINA&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;instrument_model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MiSeq&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;run_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YYMMDD_AB000000_1234_ABCDEFGHI0&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;start_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YYYY-MM-DD HH:MM&quot;</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6e06392f-e030-4cf9-911a-8dc9f2d4e714"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"majora-sam"</span><span class="w">
+    </span><span class="nl">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6e06392f-e030-4cf9-911a-8dc9f2d4e714&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;majora-sam&quot;</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put sequencing <span class="se">\</span>
-    <span class="nt">--instrument-make</span> ILLUMINA <span class="se">\</span>
-    <span class="nt">--instrument-model</span> MiSeq <span class="se">\</span>
-    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put sequencing <span class="se">&lt;/span&gt;
+    <span class="nt">--instrument-make</span> ILLUMINA <span class="se">&lt;/span&gt;
+    <span class="nt">--instrument-model</span> MiSeq <span class="se">&lt;/span&gt;
+    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">&lt;/span&gt;
     <span class="nt">--run-name</span> YYMMDD_AB000000_1234_ABCDEFGHI0 
 </code></pre></div>
 <blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put sequencing <span class="se">\</span>
-    <span class="nt">--instrument-make</span> ILLUMINA <span class="se">\</span>
-    <span class="nt">--instrument-model</span> MiSeq <span class="se">\</span>
-    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">\</span>
-    <span class="nt">--run-name</span> YYMMDD_AB000000_1234_ABCDEFGHI0 <span class="se">\</span>
-    <span class="nt">--bioinfo-pipe-name</span> <span class="s1">'ARTIC Pipeline (iVar)'</span> <span class="se">\</span>
-    <span class="nt">--bioinfo-pipe-version</span> 1.3.0 <span class="se">\</span>
-    <span class="nt">--end-time</span> <span class="s1">'YYYY-MM-DD HH:MM'</span> <span class="se">\</span>
-    <span class="nt">--flowcell-id</span> ABCDEF <span class="se">\</span>
-    <span class="nt">--flowcell-type</span> v3 <span class="se">\</span>
-    <span class="nt">--start-time</span> <span class="s1">'YYYY-MM-DD HH:MM'</span> 
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina put sequencing <span class="se">&lt;/span&gt;
+    <span class="nt">--instrument-make</span> ILLUMINA <span class="se">&lt;/span&gt;
+    <span class="nt">--instrument-model</span> MiSeq <span class="se">&lt;/span&gt;
+    <span class="nt">--library-name</span> HOOT-LIBRARY-20200322 <span class="se">&lt;/span&gt;
+    <span class="nt">--run-name</span> YYMMDD_AB000000_1234_ABCDEFGHI0 <span class="se">&lt;/span&gt;
+    <span class="nt">--bioinfo-pipe-name</span> <span class="s1">&#39;ARTIC Pipeline (iVar)&#39;</span> <span class="se">&lt;/span&gt;
+    <span class="nt">--bioinfo-pipe-version</span> 1.3.0 <span class="se">&lt;/span&gt;
+    <span class="nt">--end-time</span> <span class="s1">&#39;YYYY-MM-DD HH:MM&#39;</span> <span class="se">&lt;/span&gt;
+    <span class="nt">--flowcell-id</span> ABCDEF <span class="se">&lt;/span&gt;
+    <span class="nt">--flowcell-type</span> v3 <span class="se">&lt;/span&gt;
+    <span class="nt">--start-time</span> <span class="s1">&#39;YYYY-MM-DD HH:MM&#39;</span> 
 </code></pre></div>
-<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote></p>
 
 <blockquote class="lang-specific plaintext--uploader"><p>Documentation for this function can be found on the CGPS uploader website linked below:</br><a href="https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing">https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing</a></p></blockquote>
 
