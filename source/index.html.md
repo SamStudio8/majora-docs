@@ -58,7 +58,6 @@ You may be interested to know that this API documentation page was created with 
 
 
 ### Attributes
-
 ```json--raw
 {
     "biosamples": {
@@ -152,10 +151,10 @@ ocarina put biosample \
 
 Name | Description | Options
 ---- | ----------- | -------
-<b><code style='color:#fff; background-color:#dc3545'>adm1</code></b></br>string, <i>required</i>, <i>enum</i> | Code of UK home nation of the patient from which the sample was collected | <ul><li><code>UK-ENG</code></li><li><code>UK-SCT</code></li><li><code>UK-WLS</code></li><li><code>UK-NIR</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>adm1</code></b></br>string, <i>required</i>, <i>enum</i> | Code of UK home nation of the patient from which the sample was collected | <ul><li><code>UK-ENG</code></li><li><code>UK-NIR</code></li><li><code>UK-SCT</code></li><li><code>UK-WLS</code></li></ul>
 <b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i> | The centrally shared ID that you will use to refer to this sample inside the consortium. | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>collection_date</code></b></br>string, <i>required</i> | Provide where possible. When collection_date cannot be provided, you must provide received_date instead. | <ul></ul>
-<b><code style='color:#fff; background-color:#dc3545'>is_surveillance</code></b></br>string, <i>required</i>, <i>enum</i> | Whether this sample was collected under the COGUK surveillance protocol. | <ul><li><code>Y</code></li><li><code>N</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>is_surveillance</code></b></br>string, <i>required</i>, <i>enum</i> | Whether this sample was collected under the COGUK surveillance protocol. | <ul><li><code>N</code></li><li><code>Y</code></li></ul>
 <b><code style='color:#000; background-color:#ffc107'>received_date</code></b></br>string, <i>possibly required</i> | Date sample was first received by any lab. This date should be as close to possible to collection_date. This date must be provided if collection_date is missing. | <ul></ul>
 <b><code style='color:#fff; background-color:#17a2b8'>adm2</code></b></br>string, <i>recommended</i> | The city or county that the patient lives in (avoid abbreviations or short hand) | <ul></ul>
 <b><code style='color:#fff; background-color:#17a2b8'>source_age</code></b></br>integer, <i>recommended</i> | Ages should be whole numbers. Neonatals should be entered as 0. | <ul></ul>
@@ -164,23 +163,23 @@ Name | Description | Options
 <b><code style='color:#fff; background-color:#6c757d'>admitted_date</code></b></br>string | If is_hospital_patient, the date (YYYY-MM-DD) that the patient was admitted to hospital | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>admitted_hospital_name</code></b></br>string | If is_hospital_patient, provide the name of the hospital. If you do not know the name, use HOSPITAL | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>admitted_hospital_trust_or_board</code></b></br>string | If is_hospital_patient, provide the name of the trust or board that administers the hospital the patient was admitted to. | <ul></ul>
-<b><code style='color:#fff; background-color:#6c757d'>admitted_with_covid_diagnosis</code></b></br>string, <i>enum</i> | If is_hospital_patient, whether the patient was admitted with a COVID diagnosis | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>admitted_with_covid_diagnosis</code></b></br>string, <i>enum</i> | If is_hospital_patient, whether the patient was admitted with a COVID diagnosis | <ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul>
 <b><code style='color:#fff; background-color:#6c757d'>anonymised_care_home_code</code></b></br>string | A code to represent a particular care home, the mapping of this code to the care home should be kept securely by your organisation. You must take care to select a code that can not link the identity of the care home. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>biosample_source_id</code></b></br>string | A unique identifier of patient or environmental sample. If you have multiple samples from the same patient, enter the FIRST central_sample_id assigned to one of their samples here.</br><aside class='warning' style='padding: 1em'>Do not provide personally identifying information here. Never use an NHS number.</aside> | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>collecting_org</code></b></br>string | The site (eg. hospital or surgery) that this sample was originally collected by. | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>collection_pillar</code></b></br>integer, <i>enum</i> | The pillar under which this sample was collected (e.g. 1, 2). This is likely 1, but leave blank if unsure. | <ul><li><code>1</code></li><li><code>2</code></li><li><code>103</code></li><li><code>34613</code></li></ul>
 <b><code style='color:#fff; background-color:#6c757d'>employing_hospital_name</code></b></br>string | If is_hcw, provide the name of the employing hospital. If you do not know the name, use HOSPITAL | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>employing_hospital_trust_or_board</code></b></br>string | If is_hcw, provide the name of the employing trust or board. | <ul></ul>
-<b><code style='color:#fff; background-color:#6c757d'>is_care_home_resident</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code style='color:#fff; background-color:#6c757d'>is_care_home_worker</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code style='color:#fff; background-color:#6c757d'>is_hcw</code></b></br>string, <i>enum</i> | Whether the sample was collected from a healthcare worker. This includes hospital-associated workers. | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code style='color:#fff; background-color:#6c757d'>is_hospital_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
-<b><code style='color:#fff; background-color:#6c757d'>is_icu_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>Y</code></li><li><code>N</code></li><li><code>(blank)</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_care_home_resident</code></b></br>string, <i>enum</i> |  | <ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_care_home_worker</code></b></br>string, <i>enum</i> |  | <ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_hcw</code></b></br>string, <i>enum</i> | Whether the sample was collected from a healthcare worker. This includes hospital-associated workers. | <ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_hospital_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>is_icu_patient</code></b></br>string, <i>enum</i> |  | <ul><li><code>(blank)</code></li><li><code>N</code></li><li><code>Y</code></li></ul>
 <b><code style='color:#fff; background-color:#6c757d'>root_sample_id</code></b></br>string | Identifier assigned to this sample from one of the health agencies (eg. PHE samples will be prefixed with H20). This is necessary for linking samples to private patient metadata later. | <ul></ul>
-<b><code style='color:#fff; background-color:#6c757d'>sample_type_collected</code></b></br>string, <i>enum</i> |  | <ul><li><code>dry swab</code></li><li><code>swab</code></li><li><code>sputum</code></li><li><code>BAL</code></li><li><code>aspirate</code></li></ul>
-<b><code style='color:#fff; background-color:#6c757d'>sample_type_received</code></b></br>string, <i>enum</i> |  | <ul><li><code>primary</code></li><li><code>extract</code></li><li><code>culture</code></li><li><code>lysate</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sample_type_collected</code></b></br>string, <i>enum</i> |  | <ul><li><code>BAL</code></li><li><code>aspirate</code></li><li><code>dry swab</code></li><li><code>sputum</code></li><li><code>swab</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>sample_type_received</code></b></br>string, <i>enum</i> |  | <ul><li><code>culture</code></li><li><code>extract</code></li><li><code>lysate</code></li><li><code>primary</code></li></ul>
 <b><code style='color:#fff; background-color:#6c757d'>sender_sample_id</code></b></br>string | If you are permitted, provide the identifier that was sent by your laboratory to SGSS here. | <ul></ul>
-<b><code style='color:#fff; background-color:#6c757d'>swab_site</code></b></br>string, <i>enum</i> | Required if sample_type_collected is swab | <ul><li><code>nose</code></li><li><code>throat</code></li><li><code>nose-throat</code></li><li><code>endotracheal</code></li><li><code>rectal</code></li></ul>
+<b><code style='color:#fff; background-color:#6c757d'>swab_site</code></b></br>string, <i>enum</i> | Required if sample_type_collected is swab | <ul><li><code>endotracheal</code></li><li><code>nose</code></li><li><code>nose-throat</code></li><li><code>rectal</code></li><li><code>throat</code></li></ul>
 
 
 ### Metrics
@@ -208,9 +207,9 @@ This endpoint allows you to submit the following Metrics:
 Namespace | Name | Description | Options
 --- | ---- | ----------- | -------
 <b><code>ct</code></b> | <b><code>ct_value</code></b> | Cycle threshold value. Cannot be negative. Code an inconclusive or negative test as 0. | <ul></ul>
-<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>ALTONA</code></li><li><code>ABBOTT</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BOSPHORE</code></li><li><code>ROCHE</code></li><li><code>INHOUSE</code></li><li><code>SEEGENE</code></li><li><code>VIASURE</code></li><li><code>BD</code></li><li><code>XPERT</code></li><li><code>QIASTAT</code></li><li><code>ALINITY</code></li><li><code>AMPLIDIAG</code></li><li><code>TAQPATH_HT</code></li><li><code>(blank)</code></li></ul>
-<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>ALTOSTAR_AM16</code></li><li><code>ABBOTT_M2000</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>ELITE_INGENIUS</code></li><li><code>CEPHEID_XPERT</code></li><li><code>QIASTAT_DX</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>INHOUSE</code></li><li><code>ALTONA</code></li><li><code>PANTHER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>BD_MAX</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>THERMO_AMPLITUDE</code></li><li><code>(blank)</code></li></ul>
-<b><code>ct</code></b> | <b><code>test_target</code></b> |  | <ul><li><code>E</code></li><li><code>N</code></li><li><code>S</code></li><li><code>RDRP</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP+N</code></li><li><code>(blank)</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_kit</code></b> |  | <ul><li><code>(blank)</code></li><li><code>ABBOTT</code></li><li><code>ALINITY</code></li><li><code>ALTONA</code></li><li><code>AMPLIDIAG</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BD</code></li><li><code>BOSPHORE</code></li><li><code>INHOUSE</code></li><li><code>QIASTAT</code></li><li><code>ROCHE</code></li><li><code>SEEGENE</code></li><li><code>TAQPATH_HT</code></li><li><code>VIASURE</code></li><li><code>XPERT</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_platform</code></b> |  | <ul><li><code>(blank)</code></li><li><code>ABBOTT_ALINITY</code></li><li><code>ABBOTT_M2000</code></li><li><code>ALTONA</code></li><li><code>ALTOSTAR_AM16</code></li><li><code>AMPLIDIAG_EASY</code></li><li><code>APPLIED_BIO_7500</code></li><li><code>AUSDIAGNOSTICS</code></li><li><code>BD_MAX</code></li><li><code>CEPHEID_XPERT</code></li><li><code>ELITE_INGENIUS</code></li><li><code>INHOUSE</code></li><li><code>PANTHER</code></li><li><code>QIAGEN_ROTORGENE</code></li><li><code>QIASTAT_DX</code></li><li><code>ROCHE_COBAS</code></li><li><code>ROCHE_FLOW</code></li><li><code>ROCHE_LIGHTCYCLER</code></li><li><code>SEEGENE_NIMBUS</code></li><li><code>THERMO_AMPLITUDE</code></li></ul>
+<b><code>ct</code></b> | <b><code>test_target</code></b> |  | <ul><li><code>(blank)</code></li><li><code>E</code></li><li><code>N</code></li><li><code>ORF1AB</code></li><li><code>ORF8</code></li><li><code>RDRP</code></li><li><code>RDRP+N</code></li><li><code>S</code></li></ul>
 
 
 ### Metadata
@@ -242,6 +241,8 @@ Namespace | Name | Description | Options
 <b><code>investigation</code></b> | <b><code>investigation_site</code></b> | An optional site name or code to differentiate between sites if the investigation covers more than one site. | <ul></ul>
 
 
+
+
 # Library
 ## Add a sequencing library to Majora
 
@@ -249,7 +250,6 @@ Namespace | Name | Description | Options
 
 
 ### Attributes
-<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
 ```json--raw
 {
     "biosamples": {
@@ -315,13 +315,13 @@ ocarina put library \
 Name | Description | Options
 ---- | ----------- | -------
 <b><code style='color:#fff; background-color:#dc3545'>central_sample_id</code></b></br>string, <i>required</i> |  | <ul></ul>
-<b><code style='color:#fff; background-color:#dc3545'>library_layout_config</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>SINGLE</code></li><li><code>PAIRED</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_layout_config</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>PAIRED</code></li><li><code>SINGLE</code></li></ul>
 <b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i> | A unique, somewhat memorable name for your library. | <ul></ul>
-<b><code style='color:#fff; background-color:#dc3545'>library_selection</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>RANDOM</code></li><li><code>PCR</code></li><li><code>RANDOM_PCR</code></li><li><code>OTHER</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_selection</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>OTHER</code></li><li><code>PCR</code></li><li><code>RANDOM</code></li><li><code>RANDOM_PCR</code></li></ul>
 <b><code style='color:#fff; background-color:#dc3545'>library_seq_kit</code></b></br>string, <i>required</i> |  | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>library_seq_protocol</code></b></br>string, <i>required</i> |  | <ul></ul>
-<b><code style='color:#fff; background-color:#dc3545'>library_source</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>GENOMIC</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li><li><code>OTHER</code></li></ul>
-<b><code style='color:#fff; background-color:#dc3545'>library_strategy</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>WGA</code></li><li><code>WGS</code></li><li><code>AMPLICON</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>OTHER</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_source</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>GENOMIC</code></li><li><code>METAGENOMIC</code></li><li><code>METATRANSCRIPTOMIC</code></li><li><code>OTHER</code></li><li><code>TRANSCRIPTOMIC</code></li><li><code>VIRAL_RNA</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>library_strategy</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>AMPLICON</code></li><li><code>OTHER</code></li><li><code>TARGETED_CAPTURE</code></li><li><code>WGA</code></li><li><code>WGS</code></li></ul>
 <b><code style='color:#fff; background-color:#17a2b8'>library_primers</code></b></br>string, <i>recommended</i> |  | <ul></ul>
 <b><code style='color:#fff; background-color:#17a2b8'>library_protocol</code></b></br>string, <i>recommended</i> |  | <ul></ul>
 <b><code style='color:#fff; background-color:#6c757d'>barcode</code></b></br>string |  | <ul></ul>
@@ -360,7 +360,6 @@ Namespace | Name | Description | Options
 
 
 ### Attributes
-<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
 ```json--raw
 {
     "library_name": "HOOT-LIBRARY-20200322",
@@ -407,7 +406,7 @@ ocarina put sequencing \
 
 Name | Description | Options
 ---- | ----------- | -------
-<b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>ILLUMINA</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li><li><code>ION_TORRENT</code></li></ul>
+<b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i> |  | <ul><li><code>ILLUMINA</code></li><li><code>ION_TORRENT</code></li><li><code>OXFORD_NANOPORE</code></li><li><code>PACIFIC_BIOSCIENCES</code></li></ul>
 <b><code style='color:#fff; background-color:#dc3545'>instrument_model</code></b></br>string, <i>required</i> |  | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>library_name</code></b></br>string, <i>required</i> | The name of the library as submitted to add_library | <ul></ul>
 <b><code style='color:#fff; background-color:#dc3545'>run_name</code></b></br>string, <i>required</i> | A unique name that corresponds to your run. Ideally, use the name generated by your sequencing instrument. | <ul></ul>
