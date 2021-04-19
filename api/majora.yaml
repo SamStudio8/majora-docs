@@ -648,7 +648,7 @@ components:
           x-ocarina-param: "--run-name"
         instrument_make:
           type: string
-          enum: ["ILLUMINA", "OXFORD_NANOPORE", "PACIFIC_BIOSCIENCES", "ION_TORRENT"]
+          enum: ["LLUMINA", "OXFORD_NANOPORE", "ION_TORRENT"]
           example: "ILLUMINA"
           x-priority: 0
           x-ocarina-param: "--instrument-make"
