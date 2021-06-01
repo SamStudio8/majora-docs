@@ -1,57 +1,59 @@
 <h2 id='add-one-or-more-biosamples-to-majora'>Add one or more biosamples to Majora</h2>
 <p><code>/artifact/biosample/add/</code></p>
 <h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK-ENG"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"adm2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birmingham"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"adm2_private"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B20"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"admitted_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"admitted_hospital_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"admitted_hospital_trust_or_board"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"admitted_with_covid_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"anonymised_care_home_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"biosample_source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC12345"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"collecting_org"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hypothetical University of Hooting"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"collection_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-03"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"collection_pillar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"employing_hospital_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"employing_hospital_trust_or_board"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_care_home_resident"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_care_home_worker"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_hcw"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_hospital_patient"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_icu_patient"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_surveillance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"epi"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"epi_cluster"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CLUSTER8"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"investigation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"investigation_cluster"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ward 0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"investigation_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"West Midlands HCW"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"investigation_site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QEHB"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"ct"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"records"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"ct_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"test_kit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"test_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"test_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORF8"</span><span class="w">
+    </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK-ENG"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"adm2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birmingham"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"adm2_private"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B20"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"admitted_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"admitted_hospital_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"admitted_hospital_trust_or_board"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"admitted_with_covid_diagnosis"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"anonymised_care_home_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"biosample_source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC12345"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"collecting_org"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hypothetical University of Hooting"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"collection_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-03"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"collection_pillar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"employing_hospital_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"employing_hospital_trust_or_board"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_care_home_resident"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_care_home_worker"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_hcw"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_hospital_patient"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_icu_patient"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_surveillance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"epi"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"epi_cluster"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CLUSTER8"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"investigation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"investigation_cluster"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ward 0"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"investigation_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"West Midlands HCW"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"investigation_site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QEHB"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"received_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"root_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PHA12345"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"sample_type_collected"</span><span class="p">:</span><span class="w"> </span><span class="s2">"swab"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"sample_type_received"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"sender_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LAB12345"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"source_age"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"source_sex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"swab_site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nose-throat"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"ct"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"records"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"ct_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"test_kit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"test_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"test_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORF8"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"received_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"root_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PHA12345"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sample_type_collected"</span><span class="p">:</span><span class="w"> </span><span class="s2">"swab"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sample_type_received"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sender_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LAB12345"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"source_age"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"source_sex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"swab_site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nose-throat"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6e06392f-e030-4cf9-911a-8dc9f2d4e714"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"majora-sam"</span><span class="w">
 </span><span class="p">}</span><span class="w">

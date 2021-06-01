@@ -144,11 +144,15 @@ def insert_path(node, path, v_type, v):
         prefix = path[:-1]
     field = path[-1]
 
+    if isinstance(node, list):
+        node = node[0]
+
     if len(prefix) > 0:
         if prefix[0] not in node:
             node[ prefix[0] ] = {}
         insert_path(node[prefix[0]], path[1:], v_type, v)
     else:
+
         if path[0] not in node:
             if v_type == "array":
                 d = {}
@@ -196,7 +200,8 @@ for path, spec in spec["paths"].items():
         for item in v:
             flat = flatten_object2(item)
             sort_flat = sorted(flat.items(), key=lambda x: (x[1].get("x-priority", 100), x[1].get("name")))
-            for kp, vp in flat.items():
+            for kp, vp in sorted(flat.items(), key=lambda x: x[1]["path"]):
+                print("inserting", vp["path"].split('.'), vp.get("type", "str"))
                 insert_path(json_example, vp["path"].split('.'), vp.get("type", "str"), vp.get("json_example"))
     #print(json_example)
 

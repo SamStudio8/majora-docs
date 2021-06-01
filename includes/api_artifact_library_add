@@ -1,22 +1,24 @@
 <h2 id='add-a-sequencing-library-to-majora'>Add a sequencing library to Majora</h2>
 <p><code>/artifact/library/add/</code></p>
 <h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"library_primers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC v3"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"library_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC v3 (LoCost)"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"library_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PCR"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"library_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRAL_RNA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"library_strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AMPLICON"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"artic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"artic_primers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"artic_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v3 (LoCost)"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"sequencing_org_received_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-01-14"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"biosamples"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"central_sample_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRM-12345"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"library_primers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC v3"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"library_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTIC v3 (LoCost)"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"library_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PCR"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"library_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRAL_RNA"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"library_strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AMPLICON"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"artic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"artic_primers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"artic_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v3 (LoCost)"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"sequencing_org_received_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-01-14"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nl">"library_layout_config"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAIRED"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"library_layout_insert_length"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
     </span><span class="nl">"library_layout_read_length"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
