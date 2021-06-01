@@ -40,7 +40,7 @@ info:
     * If metadata is missing, send a blank field or do not submit the field at all. Do not submit 'unknown' or 'null' or any other text that attempts to explain that the field is missing.
     <hr>
 
-  version: 2.5.1
+  version: 2.7.0
 externalDocs:
   description: Majora on github
   url: 'https://github.com/SamStudio8/majora'
@@ -59,6 +59,7 @@ paths:
         summary: "Add one or more biosamples to Majora"
         description: ""
         operationId: "api.artifact.biosample.add"
+        x-majora-scopes: "majora2.add_biosampleartifact majora2.change_biosampleartifact majora2.add_biosamplesource majora2.change_biosamplesource majora2.add_biosourcesamplingprocess majora2.change_biosourcesamplingprocess"
         x-ocarina-cmd: "put biosample"
         x-ocarina-api: null
         x-uploader-doc: "https://metadata.docs.cog-uk.io/bulk-upload-1/bulk-upload"
@@ -80,6 +81,35 @@ paths:
           '500':
             description: "Server sad"
             content: {}
+  /artifact/biosample/addempty/:
+    post:
+        tags:
+        - artifact
+        summary: "Add one or more empty biosamples to Majora"
+        description: ""
+        operationId: "api.artifact.biosample.addempty"
+        x-majora-scopes: "!majora2.force_add_biosampleartifact majora2.add_biosampleartifact majora2.change_biosampleartifact majora2.add_biosourcesamplingprocess majora2.change_biosourcesamplingprocess"
+        x-ocarina-cmd: "empty biosample"
+        x-ocarina-api: null
+        x-uploader-doc: null
+        requestBody:
+          description: "Empty Biosample to be added to Majora"
+          content:
+            application/json:
+              schema: 
+                allOf: 
+                  - $ref: '#/components/schemas/Request'
+                  - $ref: '#/components/schemas/EmptyBiosampleRequest'
+          required: true
+        responses:
+          '200':
+            $ref: '#/components/responses/Majora_OK'
+          '400':
+            description: "General unauthorised or invalid query"
+            content: {}
+          '500':
+            description: "Server sad"
+            content: {}
   /artifact/biosample/query/validity:
     post:
         tags:
@@ -87,6 +117,10 @@ paths:
         summary: "Check the status of one or more biosamples in Majora"
         description: ""
         operationId: "api.artifact.biosample.query.validity"
+        x-majora-scopes: ""
+        x-ocarina-cmd: "get biosample-validity"
+        x-ocarina-api: null
+        x-uploader-doc: null
         requestBody:
           description: "Biosamples to be checked"
           content:
@@ -112,6 +146,7 @@ paths:
       summary: "Add a sequencing library to Majora"
       description: ""
       operationId: "api.artifact.library.add"
+      x-majora-scopes: "majora2.add_biosampleartifact majora2.change_biosampleartifact majora2.add_libraryartifact majora2.change_libraryartifact majora2.add_librarypoolingprocess majora2.change_librarypoolingprocess"
       x-ocarina-cmd: "put library"
       x-ocarina-api: null
       x-uploader-doc: "https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing"
@@ -139,6 +174,7 @@ paths:
       summary: "Add a sequencing run to Majora"
       description: ""
       operationId: "api.process.sequencing.add"
+      x-majora-scopes: "majora2.change_libraryartifact majora2.add_dnasequencingprocess majora2.change_dnasequencingprocess"
       x-ocarina-cmd: "put sequencing"
       x-ocarina-api: null
       x-uploader-doc: "https://metadata.docs.cog-uk.io/bulk-upload-1/samples-and-sequencing"
@@ -226,6 +262,24 @@ components:
         success:
           type: boolean
           description: "true if errors == 0"
+    EmptyBiosample:
+      title: 'emptybiosample'
+      required:
+      - central_sample_id
+      type: object
+      properties:
+        central_sample_id:
+          x-ocarina-param: "--central-sample-id"
+          x-priority: 0
+          type: string
+          example: "BIRM-12345"
+          description: "The centrally shared ID that you will use to refer to this sample inside the consortium."
+        sender_sample_id:
+          example: "LAB12345"
+          x-ocarina-param: "--sender-sample-id"
+          x-priority: 100
+          type: string
+          description: "If you are permitted, provide the identifier that was sent by your laboratory to SGSS here."
     Biosample:
       title: 'biosample'
       required:
@@ -440,6 +494,17 @@ components:
             allOf:
               - $ref: '#/components/schemas/Biosample'
               - $ref: '#/components/schemas/BiosampleCollection'
+    EmptyBiosampleRequest:
+      title: 'empty_biosample_request'
+      type: object
+      required:
+      - biosamples
+      properties:
+        biosamples:
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/EmptyBiosample'
     Library:
       title: 'library'
       type: object

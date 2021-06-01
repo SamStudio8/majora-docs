@@ -84,7 +84,7 @@ def flatten_object2(spec, prefix=""):
     for sspec in spec:
         for field, field_spec in sspec.get("properties", {}).items():
             if field_spec.get("type") == "array":
-                subspec = flatten_object(field_spec.get("items", {}), prefix+field+'.')
+                subspec = flatten_object2(field_spec.get("items", {}), prefix+field+'.')
                 flat_spec.update(subspec)
 
                 flat_spec.update({field: {
@@ -97,7 +97,7 @@ def flatten_object2(spec, prefix=""):
                     "x-ocarina-nargs-root": field_spec.get("x-ocarina-nargs-root"),
                 }})
             elif field_spec.get("type") == "object":
-                subspec = flatten_object(field_spec, prefix+field+'.')
+                subspec = flatten_object2(field_spec, prefix+field+'.')
                 flat_spec.update(subspec)
                 flat_spec.update({field: {
                     "name": field,
@@ -465,6 +465,27 @@ for path, spec in spec["paths"].items():
                 vp.get("description", "").replace('\n', "</br>"),
                 "<ul>" + ''.join(["<li><code>%s</code></li>" % f for f in vp.get("enum", "")]) + "</ul>",
             ]]))
+
+
+    # Scopes
+    lines.append("\n\n### Scopes\n")
+    lines.append("<ul>\n")
+    if spec.get("x-majora-scopes"):
+        scopes = spec.get("x-majora-scopes", "").split(" ")
+        if len(scopes) > 0:
+            for scope in sorted(scopes):
+                if scope[0] == '!':
+                    pri_colour = PRIORITY_COLOUR.get(0)
+                    scope_style = "<b><code%s>%s</code> (This scope must be requested)</b>" % (" style='%s'" % pri_colour, scope[1:])
+                else:
+                    pri_colour = PRIORITY_COLOUR.get(None)
+                    scope_style = "<b><code%s>%s</code></b>" % (" style='%s'" % pri_colour, scope)
+                lines.append("<li>%s</li>" % scope_style)
+        else:
+            lines.append("<li>This endpoint is scopeless and will work with any valid OAuth token</li>")
+    else:
+        lines.append("<li>This endpoint is scopeless and will work with any valid OAuth token</li>")
+    lines.append("</ul>\n")
 
     lines.append("\n\n")
 

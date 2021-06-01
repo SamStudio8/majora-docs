@@ -8,8 +8,14 @@
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"majora-sam"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<blockquote class="lang-specific shell--ocarina"><p>Function not currently implemented in Ocarina command line interface</p></blockquote>
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina get biosample-validity <span class="se">\</span>
 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina get biosample-validity <span class="se">\</span>
+
+</code></pre></div>
 <blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
 
 <blockquote class="lang-specific plaintext--uploader"><p>Function not currently implemented in CGPS Metadata Uploader</p></blockquote>
@@ -22,3 +28,8 @@
 </tr>
 </thead><tbody>
 </tbody></table>
+<h3 id='scopes'>Scopes</h3>
+<ul>
+
+<li>This endpoint is scopeless and will work with any valid OAuth token</li>
+</ul>

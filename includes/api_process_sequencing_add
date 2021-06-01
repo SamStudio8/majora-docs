@@ -103,3 +103,10 @@
 <td><ul></ul></td>
 </tr>
 </tbody></table>
+<h3 id='scopes'>Scopes</h3>
+<ul>
+
+<li><b><code style='color:#fff; background-color:#6c757d'>majora2.add_dnasequencingprocess</code></b></li>
+<li><b><code style='color:#fff; background-color:#6c757d'>majora2.change_dnasequencingprocess</code></b></li>
+<li><b><code style='color:#fff; background-color:#6c757d'>majora2.change_libraryartifact</code></b></li>
+</ul>
