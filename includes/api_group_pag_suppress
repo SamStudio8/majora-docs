@@ -1,0 +1,46 @@
+<h2 id='suppress-a-published-artifact-group-pag-from-the-data-set'>Suppress a Published Artifact Group (PAG) from the data set</h2>
+<p><code>/group/pag/suppress/</code></p>
+<h3 id='attributes'>Attributes</h3><div class="highlight"><pre class="highlight json tab-json--raw"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"publish_group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COGUK/BIRM-12345/BIRM:YYMMDD_AB000000_1234_ABCDEFGHI0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WRONG_SEQUENCE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6e06392f-e030-4cf9-911a-8dc9f2d4e714"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"majora-sam"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Minimal Ocarina command with mandatory parameters:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina pag suppress <span class="se">\</span>
+    <span class="nt">--publish-group</span> COGUK/BIRM-12345/BIRM:YYMMDD_AB000000_1234_ABCDEFGHI0 <span class="se">\</span>
+    <span class="nt">--reason</span> WRONG_SEQUENCE 
+</code></pre></div>
+<blockquote class="lang-specific shell--ocarina"><p>Full Ocarina command example:</p></blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell--ocarina"><code>ocarina pag suppress <span class="se">\</span>
+    <span class="nt">--publish-group</span> COGUK/BIRM-12345/BIRM:YYMMDD_AB000000_1234_ABCDEFGHI0 <span class="se">\</span>
+    <span class="nt">--reason</span> WRONG_SEQUENCE 
+</code></pre></div>
+<blockquote class="lang-specific python"><p>Function not currently implemented in Ocarina Python API</p></blockquote>
+
+<blockquote class="lang-specific plaintext--uploader"><p>Function not currently implemented in CGPS Metadata Uploader</p></blockquote>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>publish_group</code></b></br>string, <i>required</i></td>
+<td>Published Artifact Group (PAG) name</td>
+<td><ul></ul></td>
+</tr>
+<tr>
+<td><b><code style='color:#fff; background-color:#dc3545'>reason</code></b></br>string, <i>required</i>, <i>enum</i></td>
+<td></td>
+<td><ul><li><code>CONTROL_FAIL</code></li><li><code>WRONG_BARCODE</code></li><li><code>WRONG_METADATA</code></li><li><code>WRONG_SEQUENCE</code></li></ul></td>
+</tr>
+</tbody></table>
+<h3 id='scopes'>Scopes</h3>
+<ul>
+
+<li><b><code style='color:#fff; background-color:#6c757d'>majora2.can_suppress_pags_via_api</code></b></li>
+</ul>

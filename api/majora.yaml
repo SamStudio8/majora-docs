@@ -40,7 +40,7 @@ info:
     * If metadata is missing, send a blank field or do not submit the field at all. Do not submit 'unknown' or 'null' or any other text that attempts to explain that the field is missing.
     <hr>
 
-  version: 2.7.0
+  version: 2.8.1
 externalDocs:
   description: Majora on github
   url: 'https://github.com/SamStudio8/majora'
@@ -186,6 +186,34 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/Request'
                 - $ref: '#/components/schemas/Sequencing'
+      responses:
+          '200':
+            $ref: '#/components/responses/Majora_OK'
+          '400':
+            description: "General unauthorised or invalid query"
+            content: {}
+          '500':
+            description: "Server sad"
+            content: {}
+  /group/pag/suppress/:
+    post:
+      tags:
+      - group
+      summary: "Suppress a Published Artifact Group (PAG) from the data set"
+      description: ""
+      operationId: "api.group.pag.suppress"
+      x-majora-scopes: "majora2.can_suppress_pags_via_api"
+      x-ocarina-cmd: "pag suppress"
+      x-ocarina-api: null
+      x-uploader-doc: null
+      requestBody:
+        description: "PAG to be suppressed from Majora"
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Request'
+                - $ref: '#/components/schemas/PAGSupressRequest'
       responses:
           '200':
             $ref: '#/components/responses/Majora_OK'
@@ -713,7 +741,7 @@ components:
           x-ocarina-param: "--run-name"
         instrument_make:
           type: string
-          enum: ["LLUMINA", "OXFORD_NANOPORE", "ION_TORRENT"]
+          enum: ["ILLUMINA", "OXFORD_NANOPORE", "ION_TORRENT"]
           example: "ILLUMINA"
           x-priority: 0
           x-ocarina-param: "--instrument-make"
@@ -933,3 +961,24 @@ components:
                 x-ocarina-param: "cluster"
                 x-ocarina-namespace: "investigation"
                 x-uploader-column: "investigation_cluster"
+    PAGSupressRequest:
+      title: 'suppress_pag'
+      type: object
+      allOf:
+        - type: object
+          required:
+          - publish_group
+          - reason
+          properties:
+            publish_group:
+              type: string
+              example: "COGUK/BIRM-12345/BIRM:YYMMDD_AB000000_1234_ABCDEFGHI0"
+              description: "Published Artifact Group (PAG) name"
+              x-ocarina-param: "--publish-group"
+              x-priority: 0
+            reason:
+              type: string
+              enum: ["WRONG_BARCODE", "WRONG_METADATA", "WRONG_SEQUENCE", "CONTROL_FAIL"]
+              example: "WRONG_SEQUENCE"
+              x-ocarina-param: "--reason"
+              x-priority: 0

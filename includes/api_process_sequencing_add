@@ -55,7 +55,7 @@
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>instrument_make</code></b></br>string, <i>required</i>, <i>enum</i></td>
 <td></td>
-<td><ul><li><code>ION_TORRENT</code></li><li><code>LLUMINA</code></li><li><code>OXFORD_NANOPORE</code></li></ul></td>
+<td><ul><li><code>ILLUMINA</code></li><li><code>ION_TORRENT</code></li><li><code>OXFORD_NANOPORE</code></li></ul></td>
 </tr>
 <tr>
 <td><b><code style='color:#fff; background-color:#dc3545'>instrument_model</code></b></br>string, <i>required</i></td>
