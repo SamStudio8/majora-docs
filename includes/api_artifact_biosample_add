@@ -37,10 +37,12 @@
             </span><span class="nl">"metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"ct"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nl">"records"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"ct_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"test_kit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"test_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"test_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORF8"</span><span class="w">
+                        </span><span class="nl">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"ct_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"test_kit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"test_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INHOUSE"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"test_target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORF8"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
