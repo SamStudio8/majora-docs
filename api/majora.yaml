@@ -40,7 +40,7 @@ info:
     * If metadata is missing, send a blank field or do not submit the field at all. Do not submit 'unknown' or 'null' or any other text that attempts to explain that the field is missing.
     <hr>
 
-  version: 2.8.2
+  version: 2.8.3
 externalDocs:
   description: Majora on github
   url: 'https://github.com/SamStudio8/majora'
@@ -841,6 +841,7 @@ components:
             "ALINITY",
             "AMPLIDIAG",
             "TAQPATH_HT",
+            "INVITROGEN",
             null
           ]
         test_platform:
